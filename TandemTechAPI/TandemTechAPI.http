@@ -1,0 +1,6 @@
+@TandemTechAPI_HostAddress = http://localhost:5294
+
+GET {{TandemTechAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
