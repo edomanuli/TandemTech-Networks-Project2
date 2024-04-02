@@ -1,4 +1,7 @@
-﻿namespace TandemTechAPI.Extensions
+﻿using Microsoft.EntityFrameworkCore;
+using Repository;
+
+namespace TandemTechAPI.Extensions
 {
     public static class ServiceExtensions
     {
@@ -22,5 +25,9 @@
                 
             });
         }
+
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts =>
+            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     }
 }
