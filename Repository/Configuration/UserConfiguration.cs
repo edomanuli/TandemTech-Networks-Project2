@@ -13,6 +13,13 @@ namespace Repository.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            // Configure relationships
+            builder.HasMany(u => u.UserPlans)
+                .WithOne(up => up.User)
+                .HasForeignKey(up => up.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //Seed data
             builder.HasData(
                     new User
                     {

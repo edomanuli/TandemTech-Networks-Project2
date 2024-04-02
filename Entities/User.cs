@@ -7,17 +7,23 @@ namespace Entities
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "First name is required.")]
-        [MaxLength(60, ErrorMessage = "First name cannot be longer than 60 characters.")]
+        [Required]
+        [MaxLength(50)]
         public string? FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last name is required.")]
-        [MaxLength(60, ErrorMessage = "Last name cannot be longer than 60 characters.")]
+        [Required]
+        [MaxLength(50)]
         public string? LastName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string? PrimanyPhone { get; set; }
+
+
+        public ICollection<UserPlan>? UserPlans { get; set; }
     }
 }
