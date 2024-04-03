@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 
 namespace Repository.Contracts
 {
-    internal interface IUserPlanRepository
+    public interface IUserPlanRepository
     {
         Task<IEnumerable<UserPlan>> GetAllUserPlansAsync();
         Task<UserPlan> GetUserPlanAsync(Guid userPlanId);
 
-        void CreateUserPlan(UserPlan userPlan);
-        void DeleteUserPlan(UserPlan userPlan);
+        void CreateUserPlanAsync(UserPlan userPlan);
+        void DeleteUserPlanAsync(UserPlan userPlan);
     }
 }

@@ -8,7 +8,7 @@ namespace Repository.Contracts
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserAsync(Guid userId);
 
-        void CreateStudent(User user);
-        void DeleteStudent(User user);
+        void CreateUser(User user);
+        void DeleteUser(User user);
     }
 }

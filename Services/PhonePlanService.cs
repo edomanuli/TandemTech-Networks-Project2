@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Service.Contracts;
 
-namespace Services
+namespace Service
 {
-    internal class PhonePlanService : IPhonePlanService
+    public class PhonePlanService : IPhonePlanService
     {
     }
 }
