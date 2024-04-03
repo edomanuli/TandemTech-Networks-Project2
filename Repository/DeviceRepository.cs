@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repository.Contracts;
 
 namespace Repository
 {
-    internal class DeviceRepository : IDeviceRepository
+    public class DeviceRepository : IDeviceRepository
     {
     }
 }

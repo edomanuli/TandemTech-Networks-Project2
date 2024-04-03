@@ -8,14 +8,14 @@ using Repository.Contracts;
 
 namespace Repository
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public void CreateStudent(User user)
+        public void CreateUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteStudent(User user)
+        public void DeleteUser(User user)
         {
             throw new NotImplementedException();
         }

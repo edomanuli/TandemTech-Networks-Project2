@@ -8,7 +8,7 @@ using Repository.Contracts;
 
 namespace Repository
 {
-    internal class UserPlanRepository : IUserPlanRepository
+    public class UserPlanRepository : IUserPlanRepository
     {
         public void CreateUserPlanAsync(UserPlan userPlan)
         {

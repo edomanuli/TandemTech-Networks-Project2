@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Contracts
 {
-    internal interface IPhoneNumberRepository
+    public interface IPhoneNumberRepository
     {
     }
 }
