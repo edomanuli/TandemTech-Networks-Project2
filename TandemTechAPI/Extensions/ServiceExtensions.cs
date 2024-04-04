@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository;
+using Service;
+using Service.Contracts;
 
 namespace TandemTechAPI.Extensions
 {
@@ -25,6 +27,9 @@ namespace TandemTechAPI.Extensions
                 
             });
         }
+
+        public static void ConfigureServiceManager(this IServiceCollection services) =>
+            services.AddScoped<IServiceManager, ServiceManager>();
 
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts =>
