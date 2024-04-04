@@ -9,7 +9,7 @@ namespace Entities
 {
     public class PhoneNumber
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(10)]

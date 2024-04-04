@@ -10,14 +10,14 @@ namespace Entities
 {
     public class Device
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string? Name { get; set; }
 
         [ForeignKey(nameof(PlanPhoneNumberId))]
-        public Guid PlanPhoneNumberId { get; set; }
+        public int PlanPhoneNumberId { get; set; }
         public PlanPhoneNumber? PlanPhoneNumber { get; set; }
     }
 }

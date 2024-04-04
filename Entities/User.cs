@@ -5,7 +5,7 @@ namespace Entities
 {
     public class User
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -18,11 +18,6 @@ namespace Entities
         [Required]
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
-
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        public string? PrimanyPhone { get; set; }
-
 
         public ICollection<UserPlan>? UserPlans { get; set; }
     }

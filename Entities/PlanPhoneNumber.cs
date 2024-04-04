@@ -9,14 +9,14 @@ namespace Entities
 {
     public class PlanPhoneNumber
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey(nameof(UserPlanId))]
-        public Guid UserPlanId { get; set; }
+        public int UserPlanId { get; set; }
         public UserPlan? UserPlan { get; set; }
 
         [ForeignKey(nameof(PhoneNumberId))]
-        public Guid PhoneNumberId { get; set; }
+        public int PhoneNumberId { get; set; }
         public PhoneNumber? PhoneNumber { get; set; }
     }
 }
