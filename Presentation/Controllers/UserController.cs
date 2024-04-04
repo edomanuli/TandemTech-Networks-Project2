@@ -19,10 +19,10 @@ namespace Presentation.Controllers
             _service = serviceManager;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUser()
+        [HttpGet("{id:int}", Name = "UserById")]
+        public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _service.User.GetUserAsync(1);
+            var user = await _service.User.GetUserAsync(id, trackChanges: false);
             return Ok(user);
         }
     }
