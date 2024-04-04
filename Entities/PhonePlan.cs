@@ -9,11 +9,15 @@ namespace Entities
 {
     public class PhonePlan
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string? Name { get; set; }
+
+        [Required]
+        [MaxLength(200)]
+        public string? Description { get; set; }
 
         [Required]
         [Range(0, double.MaxValue)]
