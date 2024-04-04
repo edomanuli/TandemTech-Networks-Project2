@@ -1,23 +1,39 @@
 ﻿using DTOs;
 using Microsoft.VisualBasic;
 using Service.Contracts;
+using Repository.Contracts;
 
 namespace Service
 {
     public class UserService : IUserService
     {   
-        public async Task<UserDto> GetUserAsync(int userId)
+        private readonly IRepositoryManager _repositoryManager;
+
+        public UserService(IRepositoryManager repositoryManager)
         {
-            UserDto dto = new UserDto();
-            dto.FirstName = "Chris";
-            dto.LastName = "Leipold";
-            dto.Email = "Chris@gmail.com";
-            return dto;
+            _repositoryManager = repositoryManager;
+        }
+
+        public async Task<UserDto> GetUserAsync(int userId, bool trackChanges)
+        {
+            var userEntity = await _repositoryManager.User.GetUserAsync(userId, trackChanges);
+
+            // Manual mapping for now, will use automapper latter
+            var userDto = new UserDto
+            {
+                Id = userEntity.Id,
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                Email = userEntity.Email
+            };
+
+            return userDto;
         }
 
         public Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             throw new NotImplementedException();
         }
+
     }
 }

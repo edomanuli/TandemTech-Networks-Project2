@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repository.Contracts;
 using Service.Contracts;
 
 namespace Service
@@ -11,9 +12,9 @@ namespace Service
     {   
         private readonly Lazy<IUserService> _userService;
        
-        public ServiceManager()
+        public ServiceManager(IRepositoryManager repositoryManager)
         {
-            _userService = new Lazy<IUserService> (() => new UserService());
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager));
         }
 
         public IUserService User => _userService.Value;
