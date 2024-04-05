@@ -22,5 +22,7 @@ namespace Repository
 
         public IUserRepository User => _userRepository.Value;
         public IPhonePlanRepository PhonePlan => _phonePlanRepository.Value;
+
+        public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
     }
 }
