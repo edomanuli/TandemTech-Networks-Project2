@@ -16,8 +16,7 @@ namespace Service
         public ServiceManager(IRepositoryManager repositoryManager)
         {
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager));
-            _userService = new Lazy<IUserService> (() => new UserService());
-            _phonePlanService = new Lazy<IPhonePlanService> (() => new PhonePlanService());
+            _phonePlanService = new Lazy<IPhonePlanService> (() => new PhonePlanService(repositoryManager));
         }
 
         public IUserService User => _userService.Value;
