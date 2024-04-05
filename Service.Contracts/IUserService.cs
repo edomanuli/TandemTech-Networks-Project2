@@ -6,5 +6,9 @@ namespace Service.Contracts
     {
         Task<UserDto> GetUserAsync(int userId, bool trackChanges);
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
+
+        Task<UserDto> CreateUserAsync(UserCreateDto createUserDto);
+        Task DeleteUserAsync(int userId);
+
     }
 }

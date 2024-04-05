@@ -4,6 +4,7 @@ using Service.Contracts;
 using Repository.Contracts;
 using AutoMapper;
 using Entities;
+using Entities.Exceptions;
 
 namespace Service
 {
@@ -18,15 +19,42 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<UserDto> GetUserAsync(int userId, bool trackChanges)
+        public async Task<UserDto> CreateUserAsync(UserCreateDto userCreateDto)
         {
-            var user = await _repositoryManager.User.GetUserAsync(userId, trackChanges);
-            return _mapper.Map<UserDto>(user);
+            var userEntity = _mapper.Map<User>(userCreateDto);
+            _repositoryManager.User.CreateUser(userEntity);
+            await _repositoryManager.SaveAsync();  // Assuming SaveAsync is implemented in IRepositoryManager
+
+            return _mapper.Map<UserDto>(userEntity);
         }
 
-        public Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        public async Task DeleteUserAsync(int userId)
         {
-            throw new NotImplementedException();
+            var userEntity = await _repositoryManager.User.GetUserAsync(userId, trackChanges: false);
+            if (userEntity == null)
+            {
+                throw new NotFoundException($"User with ID {userId} not found.");
+            }
+
+            _repositoryManager.User.DeleteUser(userEntity);
+            await _repositoryManager.SaveAsync();
+        }
+
+        public async Task<UserDto> GetUserAsync(int userId, bool trackChanges)
+        {
+            var userEntity = await _repositoryManager.User.GetUserAsync(userId, trackChanges);
+            if (userEntity == null)
+            {
+                throw new NotFoundException($"User with ID {userId} not found.");
+            }
+
+            return _mapper.Map<UserDto>(userEntity);
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        {
+            var userEntities = await _repositoryManager.User.GetAllUsersAsync();
+            return _mapper.Map<IEnumerable<UserDto>>(userEntities);
         }
 
     }

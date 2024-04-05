@@ -10,5 +10,7 @@ namespace Repository.Contracts
     {
         IUserRepository User { get; }
         IPhonePlanRepository PhonePlan { get; }
+
+        Task SaveAsync();
     }
 }

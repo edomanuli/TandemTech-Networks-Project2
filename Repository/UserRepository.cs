@@ -13,19 +13,13 @@ namespace Repository
     {
         public UserRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
-        public void CreateUser(User user)
-        {
-            throw new NotImplementedException();
-        }
+        public void CreateUser(User user) => Create(user);
 
-        public void DeleteUser(User user)
-        {
-            throw new NotImplementedException();
-        }
+        public void DeleteUser(User user) => Delete(user);
 
-        public Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await RepositoryContext.Set<User>().ToListAsync();
         }
 
         public async Task<User> GetUserAsync(int userId, bool trackChanges)
@@ -33,6 +27,12 @@ namespace Repository
             var query = FindByCondition(u => u.Id.Equals(userId), trackChanges);
             var user = await query.SingleOrDefaultAsync();
             return user;
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges)
+        {
+            var query = FindAll(trackChanges).OrderBy(s => s.LastName);
+            return await query.ToListAsync();
         }
     }
 }
