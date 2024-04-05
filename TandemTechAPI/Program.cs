@@ -1,5 +1,6 @@
 using TandemTechAPI.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using TandemTechAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyRefference).Assembly);
