@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 
 namespace Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
+        public UserRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
+
         public void CreateUser(User user)
         {
             throw new NotImplementedException();
@@ -25,9 +28,11 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUserAsync(Guid userId)
+        public async Task<User> GetUserAsync(int userId, bool trackChanges)
         {
-            throw new NotImplementedException();
+            var query = FindByCondition(u => u.Id.Equals(userId), trackChanges);
+            var user = await query.SingleOrDefaultAsync();
+            return user;
         }
     }
 }
