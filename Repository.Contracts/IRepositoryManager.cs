@@ -9,7 +9,7 @@ namespace Repository.Contracts
     public interface IRepositoryManager
     {
         IUserRepository User { get; }
-        IPhonePlanRepository PhonePlan { get; }
+        IPlanInfoRepository PlanInfo { get; }
 
         Task SaveAsync();
     }

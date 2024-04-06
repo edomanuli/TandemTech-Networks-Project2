@@ -15,7 +15,7 @@ namespace Service
 
         public async Task<PhonePlanDto> GetPhonePlanAsync(int phonePlanId, bool trackChanges)
         {
-            var phonePlanEntity = await _repositoryManager.PhonePlan.GetPhonePlanAsync(phonePlanId, trackChanges);
+            var phonePlanEntity = await _repositoryManager.PlanInfo.GetPlanInfoAsync(phonePlanId, trackChanges);
 
             // Manual mapping for now, will use automapper later
             var phonePlanDto = new PhonePlanDto

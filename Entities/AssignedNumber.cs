@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class PlanPhoneNumber
+    public class AssignedNumber
     {
         public int Id { get; set; }
-
-        [ForeignKey(nameof(UserPlanId))]
-        public int UserPlanId { get; set; }
-        public UserPlan? UserPlan { get; set; }
-
-        [ForeignKey(nameof(PhoneNumberId))]
         public int PhoneNumberId { get; set; }
+        public int UserPlanId { get; set; }
+
         public PhoneNumber? PhoneNumber { get; set; }
+        public UserPlan? UserPlan { get; set; }
+        public Device? Device { get; set; }
     }
 }

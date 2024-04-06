@@ -10,10 +10,9 @@ namespace Entities
     public class PhoneNumber
     {
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        [DataType(DataType.PhoneNumber)]
         public string? Number { get; set; }
+        public bool IsPorted { get; set; }
+
+        public ICollection<AssignedNumber>? AssignedNumbers { get; set; }
     }
 }
