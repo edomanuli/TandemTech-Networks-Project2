@@ -4,30 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 
 namespace Repository
 {
-    public class UserPlanRepository : IUserPlanRepository
+    public class UserPlanRepository : RepositoryBase<UserPlan>, IUserPlanRepository
     {
-        public void CreateUserPlanAsync(UserPlan userPlan)
+        public UserPlanRepository(RepositoryContext context) : base(context) { }
+
+        public void CreateUserPlan(UserPlan userPlan) => Create(userPlan);
+
+        public void DeleteUserPlan(UserPlan userPlan) => Delete(userPlan);
+
+        public async Task<IEnumerable<UserPlan>> GetAllUserPlansAsync(bool trackChanges)
         {
-            throw new NotImplementedException();
+            return await FindAll(trackChanges)
+                         .Include(up => up.User)
+                         .Include(up => up.PlanInfo)
+                         .ToListAsync();
         }
 
-        public void DeleteUserPlanAsync(UserPlan userPlan)
+        public async Task<UserPlan?> GetUserPlanAsync(int userPlanId, bool trackChanges)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<UserPlan>> GetAllUserPlansAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserPlan> GetUserPlanAsync(Guid userPlanId)
-        {
-            throw new NotImplementedException();
+            return await FindByCondition(up => up.Id == userPlanId, trackChanges)
+                         .Include(up => up.User)
+                         .Include(up => up.PlanInfo)
+                         .FirstOrDefaultAsync();
         }
     }
+
 }

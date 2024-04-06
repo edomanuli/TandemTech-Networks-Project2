@@ -10,5 +10,6 @@ namespace Service.Contracts
     {
         IUserService User {  get; }
         IPlanInfoService PlanInfo { get; }
+        IUserPlanService UserPlan { get; }
     }
 }

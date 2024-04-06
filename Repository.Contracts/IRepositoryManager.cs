@@ -10,6 +10,7 @@ namespace Repository.Contracts
     {
         IUserRepository User { get; }
         IPlanInfoRepository PlanInfo { get; }
+        IUserPlanRepository UserPlan { get; }
 
         Task SaveAsync();
     }

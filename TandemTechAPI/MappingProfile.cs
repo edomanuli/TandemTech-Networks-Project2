@@ -10,10 +10,12 @@ namespace TandemTechAPI
         {
             CreateMap<User, UserDto>();
             CreateMap<UserCreateDto, User>();
-            CreateMap<PlanInfoDto, PlanInfo>();
 
-            // Add this line to map from Entities.PlanInfo to DTOs.PlanInfoDto
+            CreateMap<PlanInfoDto, PlanInfo>();
             CreateMap<PlanInfo, PlanInfoDto>();
+
+            CreateMap<UserPlan, UserPlanDto>();
+            CreateMap<UserPlanCreateDto, UserPlan>();
         }
     }
 }

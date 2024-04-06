@@ -11,7 +11,7 @@ namespace Repository
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        public UserRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
+        public UserRepository(RepositoryContext context) : base(context) { }
 
         public void CreateUser(User user) => Create(user);
 
