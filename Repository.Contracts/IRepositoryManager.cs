@@ -15,6 +15,8 @@ namespace Repository.Contracts
         IUserPlanRepository UserPlan { get; }
         IAssignedNumberRepository AssignedNumber { get; }
         
+        IMonthlyBillRepository MonthlyBill { get; }
+
         Task SaveAsync();
     }
 }

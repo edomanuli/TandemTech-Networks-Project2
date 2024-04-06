@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public record UserCreateDto
+    public record PlanBillDto
     {
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
+        public int MonthlyBillId { get; set; }
+        public DateTime BillingDate { get; set; }
+        public decimal Amount { get; set; }
     }
 }

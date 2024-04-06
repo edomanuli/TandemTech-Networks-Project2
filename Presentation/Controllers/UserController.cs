@@ -41,7 +41,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id:int}", Name = "UserById")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _service.User.GetUserAsync(id, trackChanges: false);

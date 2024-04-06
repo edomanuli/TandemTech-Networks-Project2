@@ -10,7 +10,13 @@ namespace DTOs
     {
         public int Id { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public UserDto? User { get; set; }
         public PlanInfoDto? PlanInfo { get; set; }
+    }
+
+    public class UserPlanCreateDto
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int PlanInfoId { get; set; }
     }
 }

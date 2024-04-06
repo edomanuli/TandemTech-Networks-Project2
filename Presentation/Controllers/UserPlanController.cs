@@ -46,5 +46,6 @@ namespace Presentation.Controllers
             await _service.UserPlan.DeleteUserPlanAsync(id, trackChanges: false);
             return NoContent();
         }
+
     }
 }

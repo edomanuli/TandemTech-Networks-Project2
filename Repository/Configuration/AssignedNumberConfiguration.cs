@@ -48,7 +48,6 @@ namespace Repository.Configuration
                 new AssignedNumber { Id = 14, UserPlanId = 8, PhoneNumberId = 18 },
                 new AssignedNumber { Id = 15, UserPlanId = 9, PhoneNumberId = 19 },
                 new AssignedNumber { Id = 16, UserPlanId = 9, PhoneNumberId = 20 },
-                new AssignedNumber { Id = 17, UserPlanId = 10, PhoneNumberId = 21 },
 
                 new AssignedNumber { Id = 18, UserPlanId = 11, PhoneNumberId = 22 },
                 new AssignedNumber { Id = 19, UserPlanId = 11, PhoneNumberId = 23 },
@@ -56,13 +55,13 @@ namespace Repository.Configuration
 
                 new AssignedNumber { Id = 21, UserPlanId = 13, PhoneNumberId = 25 },
 
-                new AssignedNumber { Id = 22, UserPlanId = 14, PhoneNumberId = 1 },
+                new AssignedNumber { Id = 22, UserPlanId = 14, PhoneNumberId = 2 },
 
-                new AssignedNumber { Id = 23, UserPlanId = 16, PhoneNumberId = 6 },
-                new AssignedNumber { Id = 24, UserPlanId = 17, PhoneNumberId = 7 },
-                new AssignedNumber { Id = 25, UserPlanId = 17, PhoneNumberId = 8 },
+                new AssignedNumber { Id = 23, UserPlanId = 16, PhoneNumberId = 3 },
+                new AssignedNumber { Id = 24, UserPlanId = 17, PhoneNumberId = 4 },
+                new AssignedNumber { Id = 25, UserPlanId = 17, PhoneNumberId = 5 },
 
-                new AssignedNumber { Id = 26, UserPlanId = 18, PhoneNumberId = 9 }
+                new AssignedNumber { Id = 26, UserPlanId = 18, PhoneNumberId = 21 }
             );
 
 

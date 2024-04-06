@@ -11,10 +11,6 @@ namespace Repository.Configuration
             builder.HasKey(b => b.Id);
 
             // Properties
-            builder.Property(b => b.Id)
-                   .IsRequired()
-                   .ValueGeneratedOnAdd();
-
             builder.Property(b => b.UserId)
                    .IsRequired();
 
@@ -22,8 +18,9 @@ namespace Repository.Configuration
                    .IsRequired();
 
             builder.Property(b => b.Total)
-                   .IsRequired()
                    .HasPrecision(18, 2);
+
+            builder.Property(b => b.IsPaid);
 
             // Relationships
             builder.HasOne(b => b.User)
@@ -36,16 +33,16 @@ namespace Repository.Configuration
 
             // Seed Data
             builder.HasData(
-                new MonthlyBill { Id = 1, UserId = 1, BillingDate = new DateTime(2024, 4, 1), Total = 30, IsPayed = true },
-                new MonthlyBill { Id = 2, UserId = 2, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPayed = false },
-                new MonthlyBill { Id = 3, UserId = 3, BillingDate = new DateTime(2024, 4, 1), Total = 120, IsPayed = true },
-                new MonthlyBill { Id = 4, UserId = 4, BillingDate = new DateTime(2024, 4, 1), Total = 40, IsPayed = false },
-                new MonthlyBill { Id = 5, UserId = 5, BillingDate = new DateTime(2024, 4, 1), Total = 70, IsPayed = true },
-                new MonthlyBill { Id = 6, UserId = 6, BillingDate = new DateTime(2024, 4, 1), Total = 110, IsPayed = false },
-                new MonthlyBill { Id = 7, UserId = 7, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPayed = true },
-                new MonthlyBill { Id = 8, UserId = 8, BillingDate = new DateTime(2024, 4, 1), Total = 30, IsPayed = true },
-                new MonthlyBill { Id = 9, UserId = 9, BillingDate = new DateTime(2024, 4, 1), Total = 100, IsPayed = false },
-                new MonthlyBill { Id = 10, UserId = 10, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPayed = true }
+                new MonthlyBill { Id = 1, UserId = 1, BillingDate = new DateTime(2024, 4, 1), Total = 30, IsPaid = true },
+                new MonthlyBill { Id = 2, UserId = 2, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPaid = false },
+                new MonthlyBill { Id = 3, UserId = 3, BillingDate = new DateTime(2024, 4, 1), Total = 120, IsPaid = true },
+                new MonthlyBill { Id = 4, UserId = 4, BillingDate = new DateTime(2024, 4, 1), Total = 40, IsPaid = false },
+                new MonthlyBill { Id = 5, UserId = 5, BillingDate = new DateTime(2024, 4, 1), Total = 70, IsPaid = true },
+                new MonthlyBill { Id = 6, UserId = 6, BillingDate = new DateTime(2024, 4, 1), Total = 110, IsPaid = false },
+                new MonthlyBill { Id = 7, UserId = 7, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPaid = true },
+                new MonthlyBill { Id = 8, UserId = 8, BillingDate = new DateTime(2024, 4, 1), Total = 30, IsPaid = true },
+                new MonthlyBill { Id = 9, UserId = 9, BillingDate = new DateTime(2024, 4, 1), Total = 100, IsPaid = false },
+                new MonthlyBill { Id = 10, UserId = 10, BillingDate = new DateTime(2024, 4, 1), Total = 60, IsPaid = true }
             );
 
 

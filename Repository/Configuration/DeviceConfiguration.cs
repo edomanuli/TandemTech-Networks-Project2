@@ -41,7 +41,6 @@ namespace Repository.Configuration
                 new Device { Id = 14, AssignedNumberId = 14, DeviceInfoId = 17, Name = "My OnePlus 9", Serial = "AV99999" },
                 new Device { Id = 15, AssignedNumberId = 15, DeviceInfoId = 25, Name = "Xiaomi Mi Mix 4", Serial = "AV88888" },
                 new Device { Id = 16, AssignedNumberId = 16, DeviceInfoId = 13, Name = "Pixel 4a 5G", Serial = "AV77777" },
-                new Device { Id = 17, AssignedNumberId = 17, DeviceInfoId = 5, Name = "iPhone 12", Serial = "OL12345" },
                 new Device { Id = 18, AssignedNumberId = 18, DeviceInfoId = 23, Name = "Xiaomi Mi 11 Lite", Serial = "OL54321" },
                 new Device { Id = 19, AssignedNumberId = 19, DeviceInfoId = 11, Name = "Google Pixel 6", Serial = "OL98765" },
                 new Device { Id = 20, AssignedNumberId = 21, DeviceInfoId = 19, Name = "OnePlus 8T", Serial = "IS24680" },
