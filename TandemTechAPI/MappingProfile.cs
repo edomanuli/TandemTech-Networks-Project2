@@ -16,6 +16,9 @@ namespace TandemTechAPI
 
             CreateMap<UserPlan, UserPlanDto>();
             CreateMap<UserPlanCreateDto, UserPlan>();
+
+            CreateMap<AssignedNumber, AssignedNumberDto>();
+            CreateMap<AssignedNumberCreateDto, AssignedNumber>();
         }
     }
 }

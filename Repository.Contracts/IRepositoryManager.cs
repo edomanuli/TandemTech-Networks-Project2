@@ -10,8 +10,11 @@ namespace Repository.Contracts
     {
         IUserRepository User { get; }
         IPlanInfoRepository PlanInfo { get; }
-        IUserPlanRepository UserPlan { get; }
+        IPhoneNumberRepository PhoneNumber { get; }
 
+        IUserPlanRepository UserPlan { get; }
+        IAssignedNumberRepository AssignedNumber { get; }
+        
         Task SaveAsync();
     }
 }

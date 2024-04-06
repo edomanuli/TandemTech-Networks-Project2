@@ -12,16 +12,19 @@ namespace Repository.Configuration
             builder.HasKey(an => an.Id);
 
             // Properties
-
+            builder.Property(an => an.UserPlanId).IsRequired();
+            builder.Property(an => an.PhoneNumberId).IsRequired();
 
             // Relationships
             builder.HasOne(an => an.UserPlan)
                    .WithMany(up => up.AssignedNumbers)
-                   .HasForeignKey(an => an.UserPlanId);
+                   .HasForeignKey(an => an.UserPlanId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(an => an.PhoneNumber)
-                   .WithMany(pn => pn.AssignedNumbers)
-                   .HasForeignKey(an => an.PhoneNumberId);
+                   .WithOne(pn => pn.AssignedNumber)
+                   .HasForeignKey<AssignedNumber>(an => an.PhoneNumberId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             // Seed data
             builder.HasData(
