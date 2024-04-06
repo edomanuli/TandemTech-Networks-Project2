@@ -7,12 +7,8 @@ using Entities;
 
 namespace Repository.Contracts
 {
-    public interface IUserPlanRepository
+    public interface IUserPlanRepository : IRepository<UserPlan>
     {
-        Task<IEnumerable<UserPlan>> GetAllUserPlansAsync();
-        Task<UserPlan?> GetUserPlanAsync(int userPlanId);
-
-        void CreateUserPlan(UserPlan userPlan);
-        void DeleteUserPlan(UserPlan userPlan);
+        Task<IEnumerable<UserPlan>> GetByUserIdAsync(int userId);
     }
 }

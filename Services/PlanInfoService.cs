@@ -20,7 +20,7 @@ namespace Service
 
         public async Task<PlanInfoDto> GetPlanInfoAsync(int phonePlanId, bool trackChanges)
         {
-            var planInfoEntity = await _repositoryManager.PlanInfo.GetPlanInfoAsync(phonePlanId, trackChanges);
+            var planInfoEntity = await _repositoryManager.PlanInfo.GetByIdAsync(phonePlanId);
 
             if ( planInfoEntity == null)
             {
@@ -33,7 +33,7 @@ namespace Service
 
         public async Task<IEnumerable<PlanInfoDto>> GetAllPlanInfoAsync()
         {
-            var planInfoEntities = await _repositoryManager.PlanInfo.GetAllPlansAsync();
+            var planInfoEntities = await _repositoryManager.PlanInfo.GetAllAsync();
             return _mapper.Map<IEnumerable<PlanInfoDto>>(planInfoEntities);
         }
     }

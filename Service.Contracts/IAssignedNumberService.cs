@@ -10,7 +10,7 @@ namespace Service.Contracts
         Task UpdateAsync(int id, AssignedNumberUpdateDto updateDto);
         Task DeleteAsync(int id);
 
-        Task<IEnumerable<AssignedNumberDto>> GetByPlanIdAsync(int planId);
+        Task<IEnumerable<AssignedNumberDto>> GetByUserPlanIdAsync(int planId);
     }
 
 }

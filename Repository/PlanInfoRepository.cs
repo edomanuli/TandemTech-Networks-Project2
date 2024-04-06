@@ -9,26 +9,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
-    public class PlanInfoRepository : RepositoryBase<PlanInfo>, IPlanInfoRepository
+    public class PlanInfoRepository : Repository<PlanInfo>, IPlanInfoRepository
     {
         public PlanInfoRepository(RepositoryContext repositoryContext) : base(repositoryContext) 
         {
         }
 
-        public async Task<IEnumerable<PlanInfo>> GetAllPlansAsync()
+        public async Task<IEnumerable<PlanInfo>> GetAllAsync()
         {
             return await RepositoryContext.Set<PlanInfo>().ToListAsync();
         }
 
-        public Task<PlanInfo?> GetPlanInfoAsync(int phonePlanId, bool trackChanges)
+        public Task<PlanInfo?> GetByIdAsync(int phonePlanId)
         {
-            var phonePlan = FindByCondition(p => p.Id.Equals(phonePlanId), trackChanges).SingleOrDefault();
+            var phonePlan = FindByCondition(p => p.Id.Equals(phonePlanId), trackChanges: false).SingleOrDefault();
             return Task.FromResult(phonePlan);
-        }
-
-        public void DeletePlanInfoAsync(PlanInfo phonePlan)
-        {
-            throw new NotImplementedException();
         }
 
         //public async Task<IEnumerable<PlanInfo>> GetAllPlansAsync()

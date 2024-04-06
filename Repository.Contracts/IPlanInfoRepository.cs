@@ -7,10 +7,7 @@ using Entities;
 
 namespace Repository.Contracts
 {
-    public interface IPlanInfoRepository
+    public interface IPlanInfoRepository : IRepository<PlanInfo>
     {
-        Task<PlanInfo?> GetPlanInfoAsync(int phonePlanId, bool trackChanges);
-        Task<IEnumerable<PlanInfo>> GetAllPlansAsync();
-        void DeletePlanInfoAsync(PlanInfo phonePlan);
     }
 }
