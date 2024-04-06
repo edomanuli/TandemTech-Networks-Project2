@@ -10,13 +10,12 @@ namespace Entities
     public class UserPlan
     {
         public int Id { get; set; }
-
-        [ForeignKey(nameof(UserId))]
         public int UserId { get; set; }
-        public User? User { get; set; }
+        public int PlanInfoId { get; set; }
+        public DateTime EnrollmentDate { get; set; }
 
-        [ForeignKey(nameof(PhonePlanId))]
-        public int PhonePlanId { get; set; }
-        public PhonePlan? PhonePlan { get; set; }
+        public User? User { get; set; }
+        public PlanInfo? PlanInfo { get; set; }
+        public ICollection<AssignedNumber>? AssignedNumbers { get; set; }
     }
 }

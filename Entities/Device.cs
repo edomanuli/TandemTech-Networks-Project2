@@ -11,13 +11,12 @@ namespace Entities
     public class Device
     {
         public int Id { get; set; }
+        public int AssignedNumberId { get; set; }
+        public int DeviceInfoId { get; set; }
+        public string Name { get; set; }
+        public string Serial { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string? Name { get; set; }
-
-        [ForeignKey(nameof(PlanPhoneNumberId))]
-        public int PlanPhoneNumberId { get; set; }
-        public PlanPhoneNumber? PlanPhoneNumber { get; set; }
+        public AssignedNumber AssignedNumber { get; set; }
+        public DeviceInfo DeviceInfo { get; set; }
     }
 }
