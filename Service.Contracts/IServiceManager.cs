@@ -8,8 +8,11 @@ namespace Service.Contracts
 {
     public interface IServiceManager
     {
-        IUserService User {  get; }
+        IUserService User { get; }
         IPlanInfoService PlanInfo { get; }
         IUserPlanService UserPlan { get; }
+        IAssignedNumberService AssignedNumber { get; }
+        IPhoneNumberService PhoneNumber { get; }
     }
+
 }

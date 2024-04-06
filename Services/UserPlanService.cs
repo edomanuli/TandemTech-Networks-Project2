@@ -25,13 +25,13 @@ namespace Service
 
         public async Task<IEnumerable<UserPlanDto>> GetAllUserPlansAsync(bool trackChanges)
         {
-            var userPlans = await _repositoryManager.UserPlan.GetAllUserPlansAsync(trackChanges);
+            var userPlans = await _repositoryManager.UserPlan.GetAllUserPlansAsync();
             return _mapper.Map<IEnumerable<UserPlanDto>>(userPlans);
         }
 
         public async Task<UserPlanDto> GetUserPlanAsync(int userPlanId)
         {
-            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId, trackChanges: false);
+            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId);
             return _mapper.Map<UserPlanDto>(userPlan);
         }
 
@@ -45,7 +45,7 @@ namespace Service
 
         public async Task DeleteUserPlanAsync(int userPlanId, bool trackChanges)
         {
-            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId, trackChanges);
+            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId);
             if (userPlan == null)
             {
                 throw new NotFoundException($"UserPlan with ID {userPlanId} not found.");

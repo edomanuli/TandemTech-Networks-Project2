@@ -17,17 +17,17 @@ namespace Repository
 
         public void DeleteUserPlan(UserPlan userPlan) => Delete(userPlan);
 
-        public async Task<IEnumerable<UserPlan>> GetAllUserPlansAsync(bool trackChanges)
+        public async Task<IEnumerable<UserPlan>> GetAllUserPlansAsync()
         {
-            return await FindAll(trackChanges)
+            return await FindAll(trackChanges: false)
                          .Include(up => up.User)
                          .Include(up => up.PlanInfo)
                          .ToListAsync();
         }
 
-        public async Task<UserPlan?> GetUserPlanAsync(int userPlanId, bool trackChanges)
+        public async Task<UserPlan?> GetUserPlanAsync(int userPlanId)
         {
-            return await FindByCondition(up => up.Id == userPlanId, trackChanges)
+            return await FindByCondition(up => up.Id == userPlanId, trackChanges: false)
                          .Include(up => up.User)
                          .Include(up => up.PlanInfo)
                          .FirstOrDefaultAsync();
