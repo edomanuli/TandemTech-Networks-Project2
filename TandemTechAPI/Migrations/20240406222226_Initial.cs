@@ -83,7 +83,7 @@ namespace TandemTechAPI.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BillingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    IsPayed = table.Column<bool>(type: "bit", nullable: false)
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -290,7 +290,7 @@ namespace TandemTechAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "MonthlyBills",
-                columns: new[] { "Id", "BillingDate", "IsPayed", "Total", "UserId" },
+                columns: new[] { "Id", "BillingDate", "IsPaid", "Total", "UserId" },
                 values: new object[,]
                 {
                     { 1, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 30m, 1 },
@@ -349,16 +349,15 @@ namespace TandemTechAPI.Migrations
                     { 14, 18, 8 },
                     { 15, 19, 9 },
                     { 16, 20, 9 },
-                    { 17, 21, 10 },
                     { 18, 22, 11 },
                     { 19, 23, 11 },
                     { 20, 24, 12 },
                     { 21, 25, 13 },
-                    { 22, 1, 14 },
-                    { 23, 6, 16 },
-                    { 24, 7, 17 },
-                    { 25, 8, 17 },
-                    { 26, 9, 18 }
+                    { 22, 2, 14 },
+                    { 23, 3, 16 },
+                    { 24, 4, 17 },
+                    { 25, 5, 17 },
+                    { 26, 21, 18 }
                 });
 
             migrationBuilder.InsertData(
@@ -405,7 +404,6 @@ namespace TandemTechAPI.Migrations
                     { 14, 14, 17, "My OnePlus 9", "AV99999" },
                     { 15, 15, 25, "Xiaomi Mi Mix 4", "AV88888" },
                     { 16, 16, 13, "Pixel 4a 5G", "AV77777" },
-                    { 17, 17, 5, "iPhone 12", "OL12345" },
                     { 18, 18, 23, "Xiaomi Mi 11 Lite", "OL54321" },
                     { 19, 19, 11, "Google Pixel 6", "OL98765" },
                     { 20, 21, 19, "OnePlus 8T", "IS24680" },
@@ -418,7 +416,8 @@ namespace TandemTechAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AssignedNumbers_PhoneNumberId",
                 table: "AssignedNumbers",
-                column: "PhoneNumberId");
+                column: "PhoneNumberId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AssignedNumbers_UserPlanId",

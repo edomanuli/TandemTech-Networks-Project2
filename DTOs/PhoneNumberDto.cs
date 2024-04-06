@@ -10,7 +10,6 @@ namespace DTOs
     {
         public int Id { get; set; }
         public string? Number { get; set; }
-
-        public AssignedNumberDto? AssignedNumberDto { get; set; }
+        public bool IsPorted { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace Service.Contracts
         IUserPlanService UserPlan { get; }
         IAssignedNumberService AssignedNumber { get; }
         IPhoneNumberService PhoneNumber { get; }
+
+        IMonthlyBillService MonthlyBill { get; }
     }
 
 }

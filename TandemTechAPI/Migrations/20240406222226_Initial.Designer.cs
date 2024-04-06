@@ -12,8 +12,8 @@ using Repository;
 namespace TandemTechAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240406010747_Adding")]
-    partial class Adding
+    [Migration("20240406222226_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,8 @@ namespace TandemTechAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PhoneNumberId");
+                    b.HasIndex("PhoneNumberId")
+                        .IsUnique();
 
                     b.HasIndex("UserPlanId");
 
@@ -146,12 +147,6 @@ namespace TandemTechAPI.Migrations
                         },
                         new
                         {
-                            Id = 17,
-                            PhoneNumberId = 21,
-                            UserPlanId = 10
-                        },
-                        new
-                        {
                             Id = 18,
                             PhoneNumberId = 22,
                             UserPlanId = 11
@@ -177,31 +172,31 @@ namespace TandemTechAPI.Migrations
                         new
                         {
                             Id = 22,
-                            PhoneNumberId = 1,
+                            PhoneNumberId = 2,
                             UserPlanId = 14
                         },
                         new
                         {
                             Id = 23,
-                            PhoneNumberId = 6,
+                            PhoneNumberId = 3,
                             UserPlanId = 16
                         },
                         new
                         {
                             Id = 24,
-                            PhoneNumberId = 7,
+                            PhoneNumberId = 4,
                             UserPlanId = 17
                         },
                         new
                         {
                             Id = 25,
-                            PhoneNumberId = 8,
+                            PhoneNumberId = 5,
                             UserPlanId = 17
                         },
                         new
                         {
                             Id = 26,
-                            PhoneNumberId = 9,
+                            PhoneNumberId = 21,
                             UserPlanId = 18
                         });
                 });
@@ -362,14 +357,6 @@ namespace TandemTechAPI.Migrations
                             DeviceInfoId = 13,
                             Name = "Pixel 4a 5G",
                             Serial = "AV77777"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            AssignedNumberId = 17,
-                            DeviceInfoId = 5,
-                            Name = "iPhone 12",
-                            Serial = "OL12345"
                         },
                         new
                         {
@@ -619,7 +606,7 @@ namespace TandemTechAPI.Migrations
                     b.Property<DateTime>("BillingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsPayed")
+                    b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
                     b.Property<decimal>("Total")
@@ -640,7 +627,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 1,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 30m,
                             UserId = 1
                         },
@@ -648,7 +635,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 2,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = false,
+                            IsPaid = false,
                             Total = 60m,
                             UserId = 2
                         },
@@ -656,7 +643,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 3,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 120m,
                             UserId = 3
                         },
@@ -664,7 +651,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 4,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = false,
+                            IsPaid = false,
                             Total = 40m,
                             UserId = 4
                         },
@@ -672,7 +659,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 5,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 70m,
                             UserId = 5
                         },
@@ -680,7 +667,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 6,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = false,
+                            IsPaid = false,
                             Total = 110m,
                             UserId = 6
                         },
@@ -688,7 +675,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 7,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 60m,
                             UserId = 7
                         },
@@ -696,7 +683,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 8,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 30m,
                             UserId = 8
                         },
@@ -704,7 +691,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 9,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = false,
+                            IsPaid = false,
                             Total = 100m,
                             UserId = 9
                         },
@@ -712,7 +699,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 10,
                             BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPayed = true,
+                            IsPaid = true,
                             Total = 60m,
                             UserId = 10
                         });
@@ -1336,8 +1323,8 @@ namespace TandemTechAPI.Migrations
             modelBuilder.Entity("Entities.AssignedNumber", b =>
                 {
                     b.HasOne("Entities.PhoneNumber", "PhoneNumber")
-                        .WithMany("AssignedNumbers")
-                        .HasForeignKey("PhoneNumberId")
+                        .WithOne("AssignedNumber")
+                        .HasForeignKey("Entities.AssignedNumber", "PhoneNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1424,7 +1411,7 @@ namespace TandemTechAPI.Migrations
 
             modelBuilder.Entity("Entities.PhoneNumber", b =>
                 {
-                    b.Navigation("AssignedNumbers");
+                    b.Navigation("AssignedNumber");
                 });
 
             modelBuilder.Entity("Entities.PlanInfo", b =>

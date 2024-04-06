@@ -11,6 +11,7 @@ namespace Service
         private readonly Lazy<IUserPlanService> _userPlanService;
         private readonly Lazy<IAssignedNumberService> _assignedNumberService;
         private readonly Lazy<IPhoneNumberService> _phoneNumberService;
+        private readonly Lazy<IMonthlyBillService> _monthlyBillService;
 
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
@@ -19,6 +20,7 @@ namespace Service
             _userPlanService = new Lazy<IUserPlanService>(() => new UserPlanService(repositoryManager, mapper));
             _assignedNumberService = new Lazy<IAssignedNumberService>(() => new AssignedNumberService(repositoryManager, mapper));
             _phoneNumberService = new Lazy<IPhoneNumberService>(() => new PhoneNumberService(repositoryManager, mapper));
+            _monthlyBillService = new Lazy<IMonthlyBillService>(() => new MonthlyBillService(repositoryManager, mapper));
         }
 
         public IUserService User => _userService.Value;
@@ -26,6 +28,7 @@ namespace Service
         public IUserPlanService UserPlan => _userPlanService.Value;
         public IAssignedNumberService AssignedNumber => _assignedNumberService.Value;
         public IPhoneNumberService PhoneNumber => _phoneNumberService.Value;
+        public IMonthlyBillService MonthlyBill => _monthlyBillService.Value;
     }
 
 }

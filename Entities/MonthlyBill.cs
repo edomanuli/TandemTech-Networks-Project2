@@ -12,7 +12,7 @@ namespace Entities
         public int UserId { get; set; }
         public DateTime BillingDate { get; set; }
         public decimal Total { get; set; }
-        public bool IsPayed { get; set; } = false;
+        public bool IsPaid { get; set; } = false;
         
         public User? User { get; set; }
         public ICollection<PlanBill>? PlanBills { get; set; }
