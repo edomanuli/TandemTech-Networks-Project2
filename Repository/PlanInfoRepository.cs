@@ -15,25 +15,33 @@ namespace Repository
         {
         }
 
-        public async Task<IEnumerable<PlanInfo>> GetAllPlansAsync()
-        {
-            return await RepositoryContext.Set<PlanInfo>().ToListAsync();
-        }
-
-        public Task<PlanInfo?> GetPlanInfoAsync(int phonePlanId, bool trackChanges)
-        {
-            var phonePlan = FindByCondition(p => p.Id.Equals(phonePlanId), trackChanges).SingleOrDefault();
-            return Task.FromResult(phonePlan);
-        }
-
-        public void DeletePlanInfoAsync(PlanInfo phonePlan)
+        public void DeletePhonePlan(PlanInfo phonePlan)
         {
             throw new NotImplementedException();
         }
 
-        //public async Task<IEnumerable<PlanInfo>> GetAllPlansAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IEnumerable<PlanInfo> GetAllPlansAsync(bool trackChanges)
+        {
+            return FindAll(trackChanges).OrderBy(pp => pp.Name).ToList();
+        }
+
+        public async Task<PlanInfo?> GetPlanInfoAsync(int phonePlanId, bool trackChanges)
+        {
+            if (trackChanges)
+            {
+                return await RepositoryContext.PlanInfo.FindAsync(phonePlanId);
+            }
+            else
+            {
+                return await RepositoryContext.PlanInfo
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Id == phonePlanId);
+            }
+        }
+
+        public Task<PlanInfo?> GetPlanAsync(int phonePlanId, bool trackChanges)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

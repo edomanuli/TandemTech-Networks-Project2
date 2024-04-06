@@ -9,6 +9,6 @@ namespace Service.Contracts
     public interface IServiceManager
     {
         IUserService User {  get; }
-        IPlanInfoService PlanInfo { get; }
+        IPhonePlanService PhonePlan { get; }
     }
 }

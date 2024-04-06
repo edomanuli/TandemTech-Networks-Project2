@@ -10,7 +10,7 @@ namespace Repository.Contracts
     public interface IPlanInfoRepository
     {
         Task<PlanInfo?> GetPlanInfoAsync(int phonePlanId, bool trackChanges);
-        Task<IEnumerable<PlanInfo>> GetAllPlansAsync();
-        void DeletePlanInfoAsync(PlanInfo phonePlan);
+        IEnumerable<PlanInfo> GetAllPlansAsync(bool trackChanges);
+        void DeletePhonePlan(PlanInfo phonePlan);
     }
 }

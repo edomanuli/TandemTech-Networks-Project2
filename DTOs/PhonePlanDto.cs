@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public record PlanInfoDto
+    public record PhonePlanDto
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public string? Description { get; set; }
         public decimal Price { get; set; }
         public int DeviceLimit { get; set; }
         public int DataLimit { get; set; }
-        public string? Description { get; set; }
     }
 }
