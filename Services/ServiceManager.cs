@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Repository.Contracts;
 using Service.Contracts;
 
@@ -12,15 +7,15 @@ namespace Service
     public class ServiceManager : IServiceManager
     {   
         private readonly Lazy<IUserService> _userService;
-        private readonly Lazy<IPhonePlanService> _phonePlanService;
+        private readonly Lazy<IPlanInfoService> _PlanInfoService;
        
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper));
-            _phonePlanService = new Lazy<IPhonePlanService> (() => new PhonePlanService(repositoryManager));
+            _PlanInfoService = new Lazy<IPlanInfoService> (() => new PlanInfoService(repositoryManager, mapper));
         }
 
         public IUserService User => _userService.Value;
-        public IPhonePlanService PhonePlan => _phonePlanService.Value;
+        public IPlanInfoService PlanInfo => _PlanInfoService.Value;
     }
 }
