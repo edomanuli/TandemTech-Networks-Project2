@@ -9,10 +9,10 @@ namespace Repository.Contracts
 {
     public interface IUserPlanRepository
     {
-        Task<IEnumerable<UserPlan>> GetAllUserPlansAsync();
-        Task<UserPlan> GetUserPlanAsync(Guid userPlanId);
+        Task<IEnumerable<UserPlan>> GetAllUserPlansAsync(bool trackChanges);
+        Task<UserPlan?> GetUserPlanAsync(int userPlanId, bool trackChanges);
 
-        void CreateUserPlanAsync(UserPlan userPlan);
-        void DeleteUserPlanAsync(UserPlan userPlan);
+        void CreateUserPlan(UserPlan userPlan);
+        void DeleteUserPlan(UserPlan userPlan);
     }
 }

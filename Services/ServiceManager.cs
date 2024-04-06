@@ -8,14 +8,17 @@ namespace Service
     {   
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IPlanInfoService> _PlanInfoService;
-       
+        private readonly Lazy<IUserPlanService> _userPlanService;
+
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
             _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper));
             _PlanInfoService = new Lazy<IPlanInfoService> (() => new PlanInfoService(repositoryManager, mapper));
+            _userPlanService = new Lazy<IUserPlanService>(() => new UserPlanService(repositoryManager, mapper));
         }
 
         public IUserService User => _userService.Value;
         public IPlanInfoService PlanInfo => _PlanInfoService.Value;
+        public IUserPlanService UserPlan => _userPlanService.Value;
     }
 }

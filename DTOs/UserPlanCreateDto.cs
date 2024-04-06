@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public record UserCreateDto
-    {
+    public class UserPlanCreateDto
+    {   
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
+        public int UserId { get; set; }
+        public int PlanInfoId { get; set; }
     }
 }
