@@ -9,14 +9,9 @@ using Repository.Contracts;
 
 namespace Repository
 {
-    public class PhoneNumberRepository : RepositoryBase<PhoneNumber>, IPhoneNumberRepository
+    public class PhoneNumberRepository : Repository<PhoneNumber>, IPhoneNumberRepository
     {
         public PhoneNumberRepository(RepositoryContext context) : base(context) { }
 
-        public async Task<IEnumerable<PhoneNumber>> GetAllAsync(bool trackChanges) =>
-            await FindAll(trackChanges).ToListAsync();
-
-        public async Task<PhoneNumber?> GetByIdAsync(int id, bool trackChanges) =>
-            await FindByCondition(phone => phone.Id == id, trackChanges).SingleOrDefaultAsync();
     }
 }

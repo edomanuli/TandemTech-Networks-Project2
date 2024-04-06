@@ -25,33 +25,33 @@ namespace Service
 
         public async Task<IEnumerable<UserPlanDto>> GetAllUserPlansAsync(bool trackChanges)
         {
-            var userPlans = await _repositoryManager.UserPlan.GetAllUserPlansAsync();
+            var userPlans = await _repositoryManager.UserPlan.GetAllAsync();
             return _mapper.Map<IEnumerable<UserPlanDto>>(userPlans);
         }
 
         public async Task<UserPlanDto> GetUserPlanAsync(int userPlanId)
         {
-            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId);
+            var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
             return _mapper.Map<UserPlanDto>(userPlan);
         }
 
         public async Task<UserPlanDto> CreateUserPlanAsync(UserPlanCreateDto userPlanCreateDto)
         {
             var userPlan = _mapper.Map<UserPlan>(userPlanCreateDto);
-            _repositoryManager.UserPlan.CreateUserPlan(userPlan);
+            _repositoryManager.UserPlan.Create(userPlan);
             await _repositoryManager.SaveAsync();
             return _mapper.Map<UserPlanDto>(userPlan);
         }
 
         public async Task DeleteUserPlanAsync(int userPlanId, bool trackChanges)
         {
-            var userPlan = await _repositoryManager.UserPlan.GetUserPlanAsync(userPlanId);
+            var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
             if (userPlan == null)
             {
                 throw new NotFoundException($"UserPlan with ID {userPlanId} not found.");
             }
 
-            _repositoryManager.UserPlan.DeleteUserPlan(userPlan);
+            _repositoryManager.UserPlan.Delete(userPlan);
             await _repositoryManager.SaveAsync();
         }
     }

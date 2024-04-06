@@ -2,11 +2,7 @@
 
 namespace Repository.Contracts
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User> 
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> GetUserAsync(int userId, bool trackChanges);
-        void CreateUser(User user);
-        void DeleteUser(User user);
     }
 }

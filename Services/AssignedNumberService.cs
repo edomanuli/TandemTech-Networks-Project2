@@ -55,9 +55,9 @@ namespace Service
             return _mapper.Map<AssignedNumberDto>(assignedNumber);
         }
 
-        public async Task<IEnumerable<AssignedNumberDto>> GetByPlanIdAsync(int planId)
+        public async Task<IEnumerable<AssignedNumberDto>> GetByUserPlanIdAsync(int planId)
         {
-            var assignedNumbers = await _repositoryManager.AssignedNumber.GetByPlanIdAsync(planId);
+            var assignedNumbers = await _repositoryManager.AssignedNumber.GetByUserPlanIdAsync(planId);
             var assignedNumberDtos = _mapper.Map<IEnumerable<AssignedNumberDto>>(assignedNumbers);
             return assignedNumberDtos;
         }

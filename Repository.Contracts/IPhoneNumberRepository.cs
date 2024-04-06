@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository.Contracts
 {
-    public interface IPhoneNumberRepository
+    public interface IPhoneNumberRepository : IRepository<PhoneNumber>
     {
-        Task<IEnumerable<PhoneNumber>> GetAllAsync(bool trackChanges);
-        Task<PhoneNumber?> GetByIdAsync(int id, bool trackChanges);
-        void Create(PhoneNumber phoneNumber);
-        void Update(PhoneNumber phoneNumber);
-        void Delete(PhoneNumber phoneNumber);
     }
 
 }

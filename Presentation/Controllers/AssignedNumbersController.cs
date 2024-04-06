@@ -42,7 +42,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                var assignedNumbers = await _service.AssignedNumber.GetByPlanIdAsync(planId);
+                var assignedNumbers = await _service.AssignedNumber.GetByUserPlanIdAsync(planId);
                 return Ok(assignedNumbers);
             }
             catch (Exception ex)

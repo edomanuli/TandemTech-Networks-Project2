@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 
 namespace Repository
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected RepositoryContext RepositoryContext;
 
-        protected RepositoryBase(RepositoryContext repositoryContext)
+        protected Repository(RepositoryContext repositoryContext)
         {
             RepositoryContext = repositoryContext;
         }
@@ -21,8 +16,7 @@ namespace Repository
         public IQueryable<T> FindAll(bool trackChanges) =>
             !trackChanges ? RepositoryContext.Set<T>().AsNoTracking() : RepositoryContext.Set<T>();
 
-
-        public IQueryable<T> FindByCondition(System.Linq.Expressions.Expression<Func<T, bool>> expression, bool trackChanges) =>
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
             !trackChanges ? RepositoryContext.Set<T>().Where(expression).AsNoTracking()
             : RepositoryContext.Set<T>().Where(expression);
 
@@ -31,5 +25,9 @@ namespace Repository
         public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
 
         public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);
+
+        public async Task<IEnumerable<T>> GetAllAsync() => await RepositoryContext.Set<T>().ToListAsync();
+
+        public async Task<T?> GetByIdAsync(int id) => await RepositoryContext.Set<T>().FindAsync(id);
     }
 }

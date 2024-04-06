@@ -9,28 +9,15 @@ using Repository.Contracts;
 
 namespace Repository
 {
-    public class UserPlanRepository : RepositoryBase<UserPlan>, IUserPlanRepository
+    public class UserPlanRepository : Repository<UserPlan>, IUserPlanRepository
     {
         public UserPlanRepository(RepositoryContext context) : base(context) { }
 
-        public void CreateUserPlan(UserPlan userPlan) => Create(userPlan);
-
-        public void DeleteUserPlan(UserPlan userPlan) => Delete(userPlan);
-
-        public async Task<IEnumerable<UserPlan>> GetAllUserPlansAsync()
+        public async Task<IEnumerable<UserPlan>> GetByUserIdAsync(int userId)
         {
-            return await FindAll(trackChanges: false)
-                         .Include(up => up.User)
-                         .Include(up => up.PlanInfo)
-                         .ToListAsync();
-        }
-
-        public async Task<UserPlan?> GetUserPlanAsync(int userPlanId)
-        {
-            return await FindByCondition(up => up.Id == userPlanId, trackChanges: false)
-                         .Include(up => up.User)
-                         .Include(up => up.PlanInfo)
-                         .FirstOrDefaultAsync();
+            return await FindByCondition(up => up.UserId == userId, trackChanges: false)
+                            .Include(up => up.PlanInfo)
+                            .ToListAsync();
         }
     }
 
