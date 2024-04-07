@@ -12,6 +12,7 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.ConfigureSwagger();
 
 builder.Services.AddControllers()
