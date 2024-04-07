@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LoggerServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Repository;
 using Repository.Contracts;
