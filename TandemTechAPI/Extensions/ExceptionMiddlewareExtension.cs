@@ -18,12 +18,13 @@ namespace TandemTechAPI.Extensions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
-                        var errorDetails = new ErrorDetails
+                        logger.LogError($"Something went wrong: {contextFeature.Error}");
+
+                        await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
                             Message = "Internal Server Error. Please try again later."
-                        };
-                        await context.Response.WriteAsync(errorDetails.ToString());
+                        }.ToString());
                     }
                 });
             });

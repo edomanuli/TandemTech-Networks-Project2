@@ -13,14 +13,14 @@ namespace Service
         private readonly Lazy<IPhoneNumberService> _phoneNumberService;
         private readonly Lazy<IMonthlyBillService> _monthlyBillService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
+        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper));
-            _planInfoService = new Lazy<IPlanInfoService>(() => new PlanInfoService(repositoryManager, mapper));
-            _userPlanService = new Lazy<IUserPlanService>(() => new UserPlanService(repositoryManager, mapper));
-            _assignedNumberService = new Lazy<IAssignedNumberService>(() => new AssignedNumberService(repositoryManager, mapper));
-            _phoneNumberService = new Lazy<IPhoneNumberService>(() => new PhoneNumberService(repositoryManager, mapper));
-            _monthlyBillService = new Lazy<IMonthlyBillService>(() => new MonthlyBillService(repositoryManager, mapper));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger, mapper));
+            _planInfoService = new Lazy<IPlanInfoService>(() => new PlanInfoService(repositoryManager, logger, mapper));
+            _userPlanService = new Lazy<IUserPlanService>(() => new UserPlanService(repositoryManager, logger, mapper));
+            _assignedNumberService = new Lazy<IAssignedNumberService>(() => new AssignedNumberService(repositoryManager, logger, mapper));
+            _phoneNumberService = new Lazy<IPhoneNumberService>(() => new PhoneNumberService(repositoryManager, logger, mapper));
+            _monthlyBillService = new Lazy<IMonthlyBillService>(() => new MonthlyBillService(repositoryManager, logger, mapper));
         }
 
         public IUserService User => _userService.Value;

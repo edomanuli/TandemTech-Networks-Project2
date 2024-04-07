@@ -15,11 +15,13 @@ namespace Service
     public class AssignedNumberService : IAssignedNumberService
     {
         private readonly IRepositoryManager _repositoryManager;
+        private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public AssignedNumberService(IRepositoryManager repositoryManager, IMapper mapper)
+        public AssignedNumberService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
             _repositoryManager = repositoryManager;
+            _logger = logger;
             _mapper = mapper;
         }
 

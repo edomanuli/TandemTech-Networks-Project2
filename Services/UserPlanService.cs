@@ -15,11 +15,13 @@ namespace Service
     public class UserPlanService : IUserPlanService
     {
         private readonly IRepositoryManager _repositoryManager;
+        private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public UserPlanService(IRepositoryManager repositoryManager, IMapper mapper)
+        public UserPlanService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
             _repositoryManager = repositoryManager;
+            _logger = logger;
             _mapper = mapper;
         }
 

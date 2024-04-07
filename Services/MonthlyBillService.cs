@@ -14,11 +14,13 @@ namespace Service
     public class MonthlyBillService : IMonthlyBillService
     {
         private readonly IRepositoryManager _repositoryManager;
+        private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public MonthlyBillService(IRepositoryManager repositoryManager, IMapper mapper)
+        public MonthlyBillService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
             _repositoryManager = repositoryManager;
+            _logger = logger;
             _mapper = mapper;
         }
 

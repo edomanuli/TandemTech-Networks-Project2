@@ -11,11 +11,13 @@ namespace Service
     public class UserService : IUserService
     {   
         private readonly IRepositoryManager _repositoryManager;
+        private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public UserService(IRepositoryManager repositoryManager, IMapper mapper)
+        public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
         {
             _repositoryManager = repositoryManager;
+            _logger = logger;
             _mapper = mapper;
         }
 
