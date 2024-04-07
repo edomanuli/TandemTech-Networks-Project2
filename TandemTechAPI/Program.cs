@@ -1,16 +1,22 @@
 using TandemTechAPI.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using TandemTechAPI;
+using NLog;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
+builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.ConfigureSwagger();
 
 builder.Services.AddControllers()
