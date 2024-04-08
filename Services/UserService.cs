@@ -5,59 +5,55 @@ using Repository.Contracts;
 using AutoMapper;
 using Entities;
 using Entities.Exceptions;
+using Microsoft.AspNetCore.Identity;
 
 namespace Service
 {
     public class UserService : IUserService
-    {   
+    {
         private readonly IRepositoryManager _repositoryManager;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
+        public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager)
         {
             _repositoryManager = repositoryManager;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public async Task<UserDto> CreateUserAsync(UserCreateDto userCreateDto)
+        public async Task<bool> AuthenticateUser(UserLoginDto userLogin)
         {
-            var userEntity = _mapper.Map<User>(userCreateDto);
-            _repositoryManager.User.Create(userEntity);
-            await _repositoryManager.SaveAsync();  // Assuming SaveAsync is implemented in IRepositoryManager
-
-            return _mapper.Map<UserDto>(userEntity);
-        }
-
-        public async Task DeleteUserAsync(int userId)
-        {
-            var userEntity = await _repositoryManager.User.GetByIdAsync(userId);
-            if (userEntity == null)
+            // Find the user by username
+            var user = await _userManager.FindByNameAsync(userLogin.Username);
+            if (user == null)
             {
-                throw new NotFoundException($"User with ID {userId} not found.");
+                _logger.LogInfo($"Authentication failed for user {userLogin.Username}: User not found.");
+                return false;
             }
 
-            _repositoryManager.User.Delete(userEntity);
-            await _repositoryManager.SaveAsync();
-        }
-
-        public async Task<UserDto> GetUserAsync(int userId, bool trackChanges)
-        {
-            var userEntity = await _repositoryManager.User.GetByIdAsync(userId);
-            if (userEntity == null)
+            // Check password
+            var result = await _userManager.CheckPasswordAsync(user, userLogin.Password);
+            if (!result)
             {
-                throw new NotFoundException($"User with ID {userId} not found.");
+                _logger.LogInfo($"Authentication failed for user {userLogin.Username}: Incorrect password.");
             }
 
-            return _mapper.Map<UserDto>(userEntity);
+            return result;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        public async Task<IdentityResult> RegisterUser(UserRegistrationDto userRegistration)
         {
-            var userEntities = await _repositoryManager.User.GetAllAsync();
-            return _mapper.Map<IEnumerable<UserDto>>(userEntities);
-        }
+            var user = _mapper.Map<User>(userRegistration);
+            var result = await _userManager.CreateAsync(user, userRegistration.Password);
 
+            if (!result.Succeeded)
+            {
+                _logger.LogError($"Registration failed for user {userRegistration.Username}. Errors: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+            }
+
+            return result;
+        }
     }
-}
