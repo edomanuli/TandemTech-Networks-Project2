@@ -5,30 +5,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Repository.Configuration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(u => u.Id);
-
-            // Define properties
-            builder.Property(u => u.Id)
-                   .IsRequired()
-                   .ValueGeneratedOnAdd();
-
+            // Properties
             builder.Property(u => u.FirstName)
-                   .IsRequired()
-                   .HasMaxLength(50);
+                 .IsRequired()
+                 .HasMaxLength(50);
 
             builder.Property(u => u.LastName)
                    .IsRequired()
                    .HasMaxLength(50);
 
-            builder.Property(u => u.Email)
-                   .IsRequired()
-                   .HasMaxLength(50);
-
-            // Define relationships
+            // Relationships
             builder.HasMany(u => u.UserPlans)
                    .WithOne(up => up.User)
                    .HasForeignKey(up => up.UserId)
@@ -38,14 +28,8 @@ namespace Repository.Configuration
                    .WithOne(b => b.User)
                    .HasForeignKey(b => b.UserId)
                    .IsRequired();
-            
-            // Configure relationships
-            builder.HasMany(u => u.UserPlans)
-                .WithOne(up => up.User)
-                .HasForeignKey(up => up.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
 
-            //Seed data
+            //Seed Data
             builder.HasData(
                 new User { Id = 1, FirstName = "Emma", LastName = "Johnson", Email = "emma.johnson@example.com" },
                 new User { Id = 2, FirstName = "Liam", LastName = "Williams", Email = "liam.williams@example.com" },

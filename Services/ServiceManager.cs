@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Repository.Contracts;
 using Service.Contracts;
 
@@ -13,9 +16,9 @@ namespace Service
         private readonly Lazy<IPhoneNumberService> _phoneNumberService;
         private readonly Lazy<IMonthlyBillService> _monthlyBillService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper)
+        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
         {
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger, mapper));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger, mapper, userManager, configuration));
             _planInfoService = new Lazy<IPlanInfoService>(() => new PlanInfoService(repositoryManager, logger, mapper));
             _userPlanService = new Lazy<IUserPlanService>(() => new UserPlanService(repositoryManager, logger, mapper));
             _assignedNumberService = new Lazy<IAssignedNumberService>(() => new AssignedNumberService(repositoryManager, logger, mapper));

@@ -6,6 +6,7 @@ using AutoMapper;
 using Entities;
 using Entities.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Service
 {
@@ -15,13 +16,15 @@ namespace Service
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager)
+        public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
         {
             _repositoryManager = repositoryManager;
             _logger = logger;
             _mapper = mapper;
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         public async Task<bool> AuthenticateUser(UserLoginDto userLogin)
@@ -57,3 +60,4 @@ namespace Service
             return result;
         }
     }
+}
