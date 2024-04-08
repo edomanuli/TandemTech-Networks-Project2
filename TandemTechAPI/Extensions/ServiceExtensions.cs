@@ -1,10 +1,14 @@
 ﻿using LoggerServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repository;
 using Repository.Contracts;
 using Service;
 using Service.Contracts;
+using System.Text;
 
 namespace TandemTechAPI.Extensions
 {
@@ -50,6 +54,29 @@ namespace TandemTechAPI.Extensions
                 s.SwaggerDoc("v1", new OpenApiInfo { Title = "TandemTech", Version = "v1" });
             });
         }
-        
+
+        public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSettings["Jwt:Issuer"],
+                        ValidAudience = jwtSettings["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Jwt:Key"]))
+                    };
+                });
+        }
     }
 }
