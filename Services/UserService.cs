@@ -7,6 +7,10 @@ using Entities;
 using Entities.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Service
 {
@@ -17,6 +21,7 @@ namespace Service
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private User? _user;
 
         public UserService(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
         {
@@ -58,6 +63,42 @@ namespace Service
             }
 
             return result;
+        }
+
+        public async Task<string> CreateToken()
+        {
+            if (_user == null)
+            {
+                throw new InvalidOperationException("No authenticated user available for token generation.");
+            }
+
+            // Get credentials
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            // Prepare claims
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, _user.UserName)
+            };
+
+            var roles = await _userManager.GetRolesAsync(_user);
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            // Generate token
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),  // Set the token expiration
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

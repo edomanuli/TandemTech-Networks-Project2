@@ -7,6 +7,7 @@ namespace Service.Contracts
     {
         Task<IdentityResult> RegisterUser(UserRegistrationDto userRegistration);
         Task<bool> AuthenticateUser(UserLoginDto userLogin);
+        Task<string> CreateToken();
 
         // Other user management methods can be added here, such as:
         // Task<UserDto> GetUserByIdAsync(string userId);
