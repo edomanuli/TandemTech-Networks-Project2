@@ -9,15 +9,15 @@ using Service.Contracts;
 
 namespace Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IServiceManager _service;
 
-        public AuthenticationController(IServiceManager serviceManager) => _service = serviceManager;
+        public UserController(IServiceManager serviceManager) => _service = serviceManager;
 
-        [HttpPost]
+        [HttpPost("register")]
 
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
         {
