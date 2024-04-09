@@ -26,7 +26,7 @@ namespace Service
 
             if ( planInfoEntity == null)
             {
-                throw new NotFoundException($"Plan with ID {phonePlanId} not found.");
+                throw new PlanInfoNotFoundException(phonePlanId);
             }
 
             return _mapper.Map<PlanInfoDto>(planInfoEntity);

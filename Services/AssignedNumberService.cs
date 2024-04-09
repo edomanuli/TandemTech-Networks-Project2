@@ -38,7 +38,7 @@ namespace Service
             var assignedNumber = await _repositoryManager.AssignedNumber.GetByIdAsync(id);
             if (assignedNumber == null)
             {
-                throw new NotFoundException($"AssignedNumber with ID {id} not found.");
+                throw new AssignedNumberNotFoundException(id);
             }
 
             _repositoryManager.AssignedNumber.Delete(assignedNumber);
@@ -69,7 +69,7 @@ namespace Service
             var assignedNumber = await _repositoryManager.AssignedNumber.GetByIdAsync(id);
             if (assignedNumber == null)
             {
-                throw new NotFoundException($"AssignedNumber with ID {id} not found.");
+                throw new AssignedNumberNotFoundException(id);
             }
 
             _mapper.Map(updateDto, assignedNumber);

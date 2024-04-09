@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Exceptions
 {
-    public abstract class NotFoundException : Exception
+    public class UserPlanNotFoundException : NotFoundException
     {
-        public NotFoundException(string message) : base(message)
+        public UserPlanNotFoundException(int Id) 
+            : base($"The plan with {Id} is not part of your plan.")
         {
+
         }
     }
 }
