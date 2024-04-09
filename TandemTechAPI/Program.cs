@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using TandemTechAPI;
 using NLog;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -17,11 +16,11 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.ConfigureSwagger();
 
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.ConfigureSwagger();
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyRefference).Assembly);

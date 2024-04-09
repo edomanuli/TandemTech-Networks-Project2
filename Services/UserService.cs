@@ -34,22 +34,16 @@ namespace Service
 
         public async Task<bool> AuthenticateUser(UserLoginDto userLogin)
         {
-            // Find the user by username
             var user = await _userManager.FindByNameAsync(userLogin.Username);
-            if (user == null)
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, userLogin.Password))
             {
-                _logger.LogInfo($"Authentication failed for user {userLogin.Username}: User not found.");
-                return false;
+                _user = user;
+                return true;
             }
 
-            // Check password
-            var result = await _userManager.CheckPasswordAsync(user, userLogin.Password);
-            if (!result)
-            {
-                _logger.LogInfo($"Authentication failed for user {userLogin.Username}: Incorrect password.");
-            }
-
-            return result;
+            _logger.LogInfo($"Authentication failed for {userLogin.Username}: Incorrect username or password.");
+            return false;
         }
 
         public async Task<IdentityResult> RegisterUser(UserRegistrationDto userRegistration)
@@ -72,8 +66,10 @@ namespace Service
                 throw new InvalidOperationException("No authenticated user available for token generation.");
             }
 
+            var jwtSettings = _configuration.GetSection("JwtSettings");
+
             // Get credentials
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["secretKey"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             // Prepare claims
@@ -83,7 +79,6 @@ namespace Service
             };
 
             var roles = await _userManager.GetRolesAsync(_user);
-
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
@@ -91,10 +86,10 @@ namespace Service
 
             // Generate token
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+                issuer: jwtSettings["validIssuer"],
+                audience: jwtSettings["validAudience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),  // Set the token expiration
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );
 

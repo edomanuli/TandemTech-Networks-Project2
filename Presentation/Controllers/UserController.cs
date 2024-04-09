@@ -18,7 +18,6 @@ namespace Presentation.Controllers
         public UserController(IServiceManager serviceManager) => _service = serviceManager;
 
         [HttpPost("register")]
-
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
         {
             var result = await _service.User.RegisterUser(userRegistration);
