@@ -34,7 +34,7 @@ namespace Service
         {
             var bill = await _repositoryManager.MonthlyBill.GetByIdAsync(billId);
             if (bill == null) {
-                throw new NotFoundException($"Bill with ID {billId} not found.");
+                throw new MonthlyBillNotFoundException(billId);
             };
 
             bill.IsPaid = true;

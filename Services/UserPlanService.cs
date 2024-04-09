@@ -34,6 +34,10 @@ namespace Service
         public async Task<UserPlanDto> GetUserPlanAsync(int userPlanId)
         {
             var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
+            if (userPlan == null)
+            {
+                throw new UserPlanNotFoundException(userPlanId);
+            }
             return _mapper.Map<UserPlanDto>(userPlan);
         }
 
