@@ -50,7 +50,7 @@ namespace Service
             var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
             if (userPlan == null)
             {
-                throw new NotFoundException($"UserPlan with ID {userPlanId} not found.");
+                throw new UserPlanNotFoundException(userPlanId);
             }
 
             _repositoryManager.UserPlan.Delete(userPlan);
