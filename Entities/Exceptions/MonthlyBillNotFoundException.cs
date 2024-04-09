@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Exceptions
 {
-    public class UserPlanNotFoundException : NotFoundException
+    public class MonthlyBillNotFoundException : NotFoundException
     {
-        public UserPlanNotFoundException(int Id) 
-            : base($"The plan with id: {Id} is not part of your plan.")
+        public MonthlyBillNotFoundException(int Id) 
+            : base($"Bill with id: {Id} not found.")
         {
 
         }
