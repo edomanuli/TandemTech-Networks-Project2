@@ -1,17 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Entities
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-
         public string? FirstName { get; set; }
-
         public string? LastName { get; set; }
-
-        public string? Email { get; set; }
 
         public ICollection<UserPlan>? UserPlans { get; set; }
         public ICollection<MonthlyBill>? Bills { get; set; }

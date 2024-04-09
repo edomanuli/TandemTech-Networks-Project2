@@ -14,38 +14,31 @@ namespace Presentation.Controllers
     public class UserController : ControllerBase
     {
         private readonly IServiceManager _service;
-        
-        public UserController(IServiceManager serviceManager)
+
+        public UserController(IServiceManager serviceManager) => _service = serviceManager;
+
+        [HttpPost("register")]
+
+        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
         {
-            _service = serviceManager;
+            var result = await _service.User.RegisterUser(userRegistration);
+
+            if (!result.Succeeded)
+            {
+               return BadRequest(result.Errors);
+            }
+            return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserLoginDto userLogin)
         {
-            var users = await _service.User.GetAllUsersAsync();
-            return Ok(users);
-        }
+            if (!await _service.User.AuthenticateUser(userLogin))
+            {
+                return Unauthorized();
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserCreateDto userDto)
-        {
-            var createdUser = await _service.User.CreateUserAsync(userDto);
-            return CreatedAtRoute("UserById", new { id = createdUser.Id }, createdUser);
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            await _service.User.DeleteUserAsync(id);
-            return NoContent();
-        }
-
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetUser(int id)
-        {
-            var user = await _service.User.GetUserAsync(id, trackChanges: false);
-            return Ok(user);
+            return Ok(new { Token = await _service.User.CreateToken() });
         }
     }
 }

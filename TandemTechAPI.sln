@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Services\Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{3C74888C-C295-4141-B652-73A4162D16A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerServices", "LoggerServices\LoggerServices.csproj", "{04DE3009-3DB4-4E86-BB56-90287174033D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerServices", "LoggerServices\LoggerServices.csproj", "{04DE3009-3DB4-4E86-BB56-90287174033D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

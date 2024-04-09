@@ -9,7 +9,9 @@ namespace TandemTechAPI
         public MappingProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<UserCreateDto, User>();
+            CreateMap<UserRegistrationDto, User>();
+            CreateMap<UserUpdateDto, User>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
             CreateMap<PlanInfoDto, PlanInfo>();
             CreateMap<PlanInfo, PlanInfoDto>();
