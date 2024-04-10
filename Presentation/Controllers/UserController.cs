@@ -26,7 +26,7 @@ namespace Presentation.Controllers
             {
                return BadRequest(result.Errors);
             }
-            return Ok(result);
+            return Ok(new {Message = "Your Registration was Successful."});
         }
 
         [HttpPost("login")]

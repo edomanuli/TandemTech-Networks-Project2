@@ -22,7 +22,7 @@ namespace TandemTechAPI.Extensions
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:5173")
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });

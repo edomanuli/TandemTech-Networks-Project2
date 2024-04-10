@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TandemTechAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class frustration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -336,16 +336,16 @@ namespace TandemTechAPI.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "d336125e-579b-4143-9847-8a689a4b3560", "emma.johnson@example.com", false, "Emma", "Johnson", false, null, null, null, null, null, false, null, false, null },
-                    { 2, 0, "551c3124-167d-437f-8c37-be25f8bf2b66", "liam.williams@example.com", false, "Liam", "Williams", false, null, null, null, null, null, false, null, false, null },
-                    { 3, 0, "91068afa-ba91-4937-a962-a3a732b01138", "olivia.brown@example.com", false, "Olivia", "Brown", false, null, null, null, null, null, false, null, false, null },
-                    { 4, 0, "b39cfd14-d136-447c-9a79-343c171e2d64", "noah.jones@example.com", false, "Noah", "Jones", false, null, null, null, null, null, false, null, false, null },
-                    { 5, 0, "f8f92b31-8cd3-40d1-bbe7-2a68f7b3cf04", "ava.garcia@example.com", false, "Ava", "Garcia", false, null, null, null, null, null, false, null, false, null },
-                    { 6, 0, "0c79d3f6-b9e5-4dca-bc5c-6a2a0e41e7a3", "oliver.miller@example.com", false, "Oliver", "Miller", false, null, null, null, null, null, false, null, false, null },
-                    { 7, 0, "41ae8c56-2696-4ef1-970d-c5b0fa0059e1", "isabella.davis@example.com", false, "Isabella", "Davis", false, null, null, null, null, null, false, null, false, null },
-                    { 8, 0, "48bcbb34-a76f-4dbd-ae2c-55c868186db6", "ethan.martinez@example.com", false, "Ethan", "Martinez", false, null, null, null, null, null, false, null, false, null },
-                    { 9, 0, "f33f5549-d22d-421d-8eeb-8a618c273173", "sophia.rodriguez@example.com", false, "Sophia", "Rodriguez", false, null, null, null, null, null, false, null, false, null },
-                    { 10, 0, "2ff0a0ad-db8a-436b-b000-408c420b3aec", "jacob.wilson@example.com", false, "Jacob", "Wilson", false, null, null, null, null, null, false, null, false, null }
+                    { 1, 0, "ca607562-7548-4aec-8da8-073859c65c6d", "emma.johnson@example.com", false, "Emma", "Johnson", false, null, null, null, null, null, false, null, false, null },
+                    { 2, 0, "f58392e7-f02b-449b-a002-d4ad385bda60", "liam.williams@example.com", false, "Liam", "Williams", false, null, null, null, null, null, false, null, false, null },
+                    { 3, 0, "0cc633fc-df06-46fe-8a68-0ad355ae8b12", "olivia.brown@example.com", false, "Olivia", "Brown", false, null, null, null, null, null, false, null, false, null },
+                    { 4, 0, "aa0c6677-0905-405c-a8e0-16824fbce69c", "noah.jones@example.com", false, "Noah", "Jones", false, null, null, null, null, null, false, null, false, null },
+                    { 5, 0, "e5086eab-e420-472a-a3df-007f89640f03", "ava.garcia@example.com", false, "Ava", "Garcia", false, null, null, null, null, null, false, null, false, null },
+                    { 6, 0, "227a1693-43b3-4557-a943-9cd5d391e5b2", "oliver.miller@example.com", false, "Oliver", "Miller", false, null, null, null, null, null, false, null, false, null },
+                    { 7, 0, "6851279c-80d0-4f03-8467-1c9000170254", "isabella.davis@example.com", false, "Isabella", "Davis", false, null, null, null, null, null, false, null, false, null },
+                    { 8, 0, "6e456b6c-89b4-4729-937d-96b955fd0c9f", "ethan.martinez@example.com", false, "Ethan", "Martinez", false, null, null, null, null, null, false, null, false, null },
+                    { 9, 0, "a654f51a-12fa-4007-bb8b-3ad53a41a2c9", "sophia.rodriguez@example.com", false, "Sophia", "Rodriguez", false, null, null, null, null, null, false, null, false, null },
+                    { 10, 0, "9f3facdd-0ed3-4013-b66f-00196db6f0c2", "jacob.wilson@example.com", false, "Jacob", "Wilson", false, null, null, null, null, null, false, null, false, null }
                 });
 
             migrationBuilder.InsertData(
