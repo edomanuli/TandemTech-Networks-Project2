@@ -75,9 +75,10 @@ namespace Service
             // Prepare claims
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName)
+                new Claim(ClaimTypes.NameIdentifier, _user.Id.ToString())
             };
 
+            // Add user roles
             var roles = await _userManager.GetRolesAsync(_user);
             foreach (var role in roles)
             {

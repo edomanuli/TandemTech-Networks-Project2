@@ -1,11 +1,14 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using System.Security.Claims;
 
 namespace Presentation.Controllers
 {
-    [Route("api/userplans")]
     [ApiController]
+    [Route("api/user/plans")]
+    [Authorize]
     public class UserPlanController : ControllerBase
     {
         private readonly IServiceManager _service;
@@ -15,35 +18,46 @@ namespace Presentation.Controllers
             _service = serviceManager;
         }
 
+        protected int GetUserId()
+        {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                throw new UnauthorizedAccessException("User ID is missing.");
+            }
+
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                throw new ArgumentException("User ID is invalid.");
+            }
+
+            return userId;
+        }
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllUserPlans()
         {
-            var userPlans = await _service.UserPlan.GetAllUserPlansAsync(trackChanges: false);
-            return Ok(userPlans);
+            int userId = GetUserId();
+
+            var plans = await _service.UserPlan.GetUserPlans(userId);
+            return Ok(plans);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserPlan(int id)
-        {
-            var userPlan = await _service.UserPlan.GetUserPlanAsync(id);
-            if (userPlan == null)
-            {
-                return NotFound($"User plan with ID {id} not found.");
-            }
-            return Ok(userPlan);
-        }
-
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateUserPlan([FromBody] UserPlanCreateDto userPlanCreateDto)
+        public async Task<IActionResult> AddUserPlan(UserPlanCreateDto userPlanCreateDto)
         {
-            var createdUserPlan = await _service.UserPlan.CreateUserPlanAsync(userPlanCreateDto);
-            return CreatedAtAction(nameof(GetUserPlan), new { id = createdUserPlan.Id }, createdUserPlan);
+            int userId = GetUserId();
+            var result = await _service.UserPlan.EnrollUserInPlan(userId, userPlanCreateDto);
+            return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserPlan(int id)
+        [Authorize]
+        [HttpDelete("{userPlanId}")]
+        public async Task<IActionResult> RemoveUserPlan(int userPlanId)
         {
-            await _service.UserPlan.DeleteUserPlanAsync(id, trackChanges: false);
+            await _service.UserPlan.CancleUserPlan(userPlanId);
             return NoContent();
         }
 
