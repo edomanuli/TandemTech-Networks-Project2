@@ -25,31 +25,29 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UserPlanDto>> GetAllUserPlansAsync(bool trackChanges)
+        public async Task<IEnumerable<PlanInfoDto>> GetPlanOptions()
         {
-            var userPlans = await _repositoryManager.UserPlan.GetAllAsync();
+            var plans = await _repositoryManager.PlanInfo.GetAllAsync();
+            return _mapper.Map<IEnumerable<PlanInfoDto>>(plans);
+        }
+
+        public async Task<IEnumerable<UserPlanDto>> GetUserPlans(int userId)
+        {
+            var userPlans = await _repositoryManager.UserPlan.GetByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<UserPlanDto>>(userPlans);
         }
 
-        public async Task<UserPlanDto> GetUserPlanAsync(int userPlanId)
+        public async Task<UserPlanDto> EnrollUserInPlan(int userId, UserPlanCreateDto enrollmentDto)
         {
-            var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
-            if (userPlan == null)
-            {
-                throw new UserPlanNotFoundException(userPlanId);
-            }
-            return _mapper.Map<UserPlanDto>(userPlan);
-        }
+            var userPlan = _mapper.Map<UserPlan>(enrollmentDto);
+            userPlan.UserId = userId;
 
-        public async Task<UserPlanDto> CreateUserPlanAsync(UserPlanCreateDto userPlanCreateDto)
-        {
-            var userPlan = _mapper.Map<UserPlan>(userPlanCreateDto);
             _repositoryManager.UserPlan.Create(userPlan);
             await _repositoryManager.SaveAsync();
             return _mapper.Map<UserPlanDto>(userPlan);
         }
 
-        public async Task DeleteUserPlanAsync(int userPlanId, bool trackChanges)
+        public async Task CancleUserPlan(int userPlanId)
         {
             var userPlan = await _repositoryManager.UserPlan.GetByIdAsync(userPlanId);
             if (userPlan == null)
@@ -61,6 +59,4 @@ namespace Service
             await _repositoryManager.SaveAsync();
         }
     }
-
-
 }

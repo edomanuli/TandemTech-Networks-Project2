@@ -4,5 +4,6 @@ namespace Repository.Contracts
 {
     public interface IUserRepository : IRepository<User> 
     {
+
     }
 }
