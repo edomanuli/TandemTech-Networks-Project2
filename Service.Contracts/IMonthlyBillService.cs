@@ -9,7 +9,6 @@ namespace Service.Contracts
 {
     public interface IMonthlyBillService
     {
-        Task<IEnumerable<MonthlyBillDto>> GetBillsByUserIdAsync(int userId);
-        Task<bool> MarkBillAsPaidAsync(int billId);
+        Task<MonthlyBillDto> GetUserBill(int userId);
     }
 }

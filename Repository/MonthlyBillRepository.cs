@@ -14,5 +14,15 @@ namespace Repository
                              .Include(mb => mb.PlanBills)
                              .ToListAsync();
         }
+
+        public async Task<MonthlyBill> GetMonthlyBillByUserAndMonth(int userId, int year, int month)
+        {
+            return await FindByCondition(bill => bill.UserId == userId &&
+                                                  bill.BillingDate.Year == year &&
+                                                  bill.BillingDate.Month == month,
+                                          trackChanges: false)
+                                .Include(bill => bill.PlanBills)
+                                .SingleOrDefaultAsync();
+        }
     }
 }
