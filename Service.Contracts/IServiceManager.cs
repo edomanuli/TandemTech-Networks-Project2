@@ -15,6 +15,8 @@ namespace Service.Contracts
         IPhoneNumberService PhoneNumber { get; }
 
         IMonthlyBillService MonthlyBill { get; }
+
+        IDeviceService Device { get; }
     }
 
 }

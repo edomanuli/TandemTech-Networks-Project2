@@ -19,6 +19,7 @@ namespace TandemTechAPI
             CreateMap<UserPlan, UserPlanDto>();
             CreateMap<UserPlanCreateDto, UserPlan>();
 
+            CreateMap<PhoneNumber, PhoneNumberDto>();
             CreateMap<AssignedNumber, AssignedNumberDto>();
             CreateMap<AssignedNumberCreateDto, AssignedNumber>();
 
@@ -26,6 +27,9 @@ namespace TandemTechAPI
             CreateMap<MonthlyBillCreateDto, MonthlyBill>();
 
             CreateMap<PlanBill, PlanBillDto>();
+
+            CreateMap<Device, DeviceDto>();
+            CreateMap<DeviceInfo, DeviceInfoDto>();
         }
     }
 }

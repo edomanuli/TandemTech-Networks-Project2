@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Repository.Contracts;
 using Service.Contracts;
+using DTOs;
 
 namespace Service
 {
@@ -22,7 +23,7 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(string userId)
+        public async Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(int userId)
         {
             var devices = await _repositoryManager.Device.GetDevicesByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<DeviceDto>>(devices);

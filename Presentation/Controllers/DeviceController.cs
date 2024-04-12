@@ -44,7 +44,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetUserDevices()
         {
             int userId = GetUserId(); // Get the user ID from the claims
-            var devices = await _service.Device.GetUserDevices(userId);
+            var devices = await _service.Device.GetDevicesByUserIdAsync(userId);
             return Ok(devices); // Return the list of devices
         }
     }
