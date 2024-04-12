@@ -12,8 +12,8 @@ using Repository;
 namespace TandemTechAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240409222633_frustration")]
-    partial class frustration
+    [Migration("20240412140307_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1160,35 +1160,43 @@ namespace TandemTechAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca607562-7548-4aec-8da8-073859c65c6d",
-                            Email = "emma.johnson@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Emma",
-                            LastName = "Johnson",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f58392e7-f02b-449b-a002-d4ad385bda60",
-                            Email = "liam.williams@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Liam",
-                            LastName = "Williams",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0cc633fc-df06-46fe-8a68-0ad355ae8b12",
+                            ConcurrencyStamp = "5a102ae3-ac00-4efb-b4e9-9a6c5c375d86",
+                            Email = "anuli@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Anuli",
+                            LastName = "Edom",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ANULI@EXAMPLE.COM",
+                            NormalizedUserName = "ANULI",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBNUs4KfQwaoIxzhUHwDOCnpbW5DlCnhQ6WXrffa4ah3fNkWJTfeqqOR8mkeg5+fbA==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "anuli"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ecfbd5c5-5dd7-40e7-bc01-f179b6d86865",
+                            Email = "CHRIS@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Chris",
+                            LastName = "Leipold",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CHRIS@EXAMPLE.COM",
+                            NormalizedUserName = "CHRIS",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPr2ETSGmkcOaydJUKLWMBHqjj4PtKLiRGYGXPR/89vMFaSF82X97QQbPa9fXO/jjw==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "chris"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b5a174ba-970d-4ba2-b8ad-e8dd7eb24e5e",
                             Email = "olivia.brown@example.com",
                             EmailConfirmed = false,
                             FirstName = "Olivia",
@@ -1201,7 +1209,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa0c6677-0905-405c-a8e0-16824fbce69c",
+                            ConcurrencyStamp = "09ee2ef8-f0ea-4ee2-ab29-fce10714292d",
                             Email = "noah.jones@example.com",
                             EmailConfirmed = false,
                             FirstName = "Noah",
@@ -1212,9 +1220,9 @@ namespace TandemTechAPI.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e5086eab-e420-472a-a3df-007f89640f03",
+                            ConcurrencyStamp = "c8ecd2e4-140c-4676-a499-0bd7c661ac9e",
                             Email = "ava.garcia@example.com",
                             EmailConfirmed = false,
                             FirstName = "Ava",
@@ -1227,7 +1235,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "227a1693-43b3-4557-a943-9cd5d391e5b2",
+                            ConcurrencyStamp = "aa8872eb-5edb-4330-9462-8c10ef5d0f6b",
                             Email = "oliver.miller@example.com",
                             EmailConfirmed = false,
                             FirstName = "Oliver",
@@ -1240,7 +1248,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6851279c-80d0-4f03-8467-1c9000170254",
+                            ConcurrencyStamp = "d5c2d10d-aad5-41a6-9896-6a2317388123",
                             Email = "isabella.davis@example.com",
                             EmailConfirmed = false,
                             FirstName = "Isabella",
@@ -1253,7 +1261,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e456b6c-89b4-4729-937d-96b955fd0c9f",
+                            ConcurrencyStamp = "cbc8d48b-3841-46b8-8f9d-d1ac3b48e23a",
                             Email = "ethan.martinez@example.com",
                             EmailConfirmed = false,
                             FirstName = "Ethan",
@@ -1266,7 +1274,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 9,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a654f51a-12fa-4007-bb8b-3ad53a41a2c9",
+                            ConcurrencyStamp = "a0581608-7288-4884-8180-4e4bcf0d20c0",
                             Email = "sophia.rodriguez@example.com",
                             EmailConfirmed = false,
                             FirstName = "Sophia",
@@ -1279,7 +1287,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 10,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f3facdd-0ed3-4013-b66f-00196db6f0c2",
+                            ConcurrencyStamp = "7e49519d-6daa-44ef-909c-a099b43cc36d",
                             Email = "jacob.wilson@example.com",
                             EmailConfirmed = false,
                             FirstName = "Jacob",
