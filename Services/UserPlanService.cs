@@ -41,6 +41,7 @@ namespace Service
         {
             var userPlan = _mapper.Map<UserPlan>(enrollmentDto);
             userPlan.UserId = userId;
+            userPlan.EnrollmentDate = DateTime.Now;
 
             _repositoryManager.UserPlan.Create(userPlan);
             await _repositoryManager.SaveAsync();
