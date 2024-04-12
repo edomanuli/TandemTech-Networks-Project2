@@ -13,11 +13,12 @@ namespace Repository
     {
         public UserPlanRepository(RepositoryContext context) : base(context) { }
 
-        public async Task<IEnumerable<UserPlan>> GetByIdWithInfoAsync(int userPlanId)
+        public async Task<UserPlan> GetByIdWithInfoAsync(int userPlanId)
         {
-            return await FindByCondition(p => p.UserId == userPlanId, trackChanges: false)
-                            .Include(p => p.PlanInfo)
-                            .ToListAsync();
+            return await FindByCondition(p => p.Id == userPlanId, trackChanges: false)
+                        .Include(p => p.PlanInfo)
+                        .Include(p => p.AssignedNumbers)
+                        .SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<UserPlan>> GetByUserIdAsync(int userId)

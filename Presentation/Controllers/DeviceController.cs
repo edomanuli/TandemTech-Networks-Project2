@@ -67,5 +67,13 @@ namespace Presentation.Controllers
             await _service.Device.DeleteDeviceAsync(deviceId);
             return NoContent();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDevice([FromBody] DeviceCreateDto deviceDto)
+        {
+            int userId = GetUserId();
+            var device = await _service.Device.AddDeviceAsync(userId, deviceDto);
+            return Ok(device);
+        }
     }
 }

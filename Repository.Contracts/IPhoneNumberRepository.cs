@@ -9,6 +9,6 @@ namespace Repository.Contracts
 {
     public interface IPhoneNumberRepository : IRepository<PhoneNumber>
     {
+        Task<PhoneNumber> GetUnassignedPhoneNumberAsync();
     }
-
 }

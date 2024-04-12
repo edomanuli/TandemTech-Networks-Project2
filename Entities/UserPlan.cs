@@ -16,6 +16,6 @@ namespace Entities
 
         public User? User { get; set; }
         public PlanInfo? PlanInfo { get; set; }
-        public ICollection<AssignedNumber>? AssignedNumbers { get; set; }
+        public ICollection<AssignedNumber>? AssignedNumbers { get; set; } = new List<AssignedNumber>();
     }
 }
