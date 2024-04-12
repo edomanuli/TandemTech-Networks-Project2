@@ -8,5 +8,6 @@ namespace Service.Contracts
 {
     public interface IDeviceService
     {
+        Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(string userId);
     }
 }
