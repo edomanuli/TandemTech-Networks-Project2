@@ -17,6 +17,8 @@ namespace Repository.Contracts
         
         IMonthlyBillRepository MonthlyBill { get; }
 
+        IDeviceRepository Device { get; }
+
         Task SaveAsync();
     }
 }
