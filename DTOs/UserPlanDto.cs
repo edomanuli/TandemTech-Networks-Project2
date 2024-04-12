@@ -9,6 +9,9 @@ namespace DTOs
     public class UserPlanDto
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
+        public int PlanInfoId { get; set; }
+
         public DateTime EnrollmentDate { get; set; }
         public PlanInfoDto? PlanInfo { get; set; }
     }

@@ -29,6 +29,25 @@ namespace Service
             return _mapper.Map<IEnumerable<DeviceDto>>(devices);
         }
 
-        // Implement other methods as needed
+        public async Task DeleteDeviceAsync(int deviceId)
+        {
+            var device = await _repositoryManager.Device.GetByIdAsync(deviceId);
+            if (device == null)
+            {
+                throw new KeyNotFoundException("Device not found.");
+            }
+            _repositoryManager.Device.Delete(device);
+            await _repositoryManager.SaveAsync();
+        }
+
+        public async Task<DeviceDto> GetDeviceByIdAsync(int deviceId)
+        {
+            var device = await _repositoryManager.Device.GetByIdAsync(deviceId);
+            if (device == null)
+            {
+                throw new KeyNotFoundException("Device not found.");
+            }
+            return _mapper.Map<DeviceDto>(device);
+        }
     }
 }

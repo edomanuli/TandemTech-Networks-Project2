@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -46,6 +47,25 @@ namespace Presentation.Controllers
             int userId = GetUserId(); // Get the user ID from the claims
             var devices = await _service.Device.GetDevicesByUserIdAsync(userId);
             return Ok(devices); // Return the list of devices
+        }
+
+        // DELETE: api/user/devices/5
+        [HttpDelete("{deviceId}")]
+        public async Task<IActionResult> DeleteUserDevice(int deviceId)
+        {
+            int userId = GetUserId();
+
+            // Get the device
+            var device = await _service.Device.GetDeviceByIdAsync(deviceId);
+            if (device == null)
+            {
+                return NotFound("Device not found.");
+            }
+
+            // TOD: Check if user owns device
+
+            await _service.Device.DeleteDeviceAsync(deviceId);
+            return NoContent();
         }
     }
 }

@@ -26,10 +26,10 @@ namespace Repository
         public async Task<Device> GetDeviceByIdAsync(int deviceId)
         {
             return await RepositoryContext.Devices
-                .Include(device => device.AssignedNumber)
+                .Include(d => d.AssignedNumber)
                     .ThenInclude(an => an.UserPlan)
-                        .ThenInclude(up => up.User)
-                .SingleOrDefaultAsync(device => device.Id == deviceId);
+                .Include(d => d.DeviceInfo)
+                .SingleOrDefaultAsync(d => d.Id == deviceId);
         }
     }
 }
