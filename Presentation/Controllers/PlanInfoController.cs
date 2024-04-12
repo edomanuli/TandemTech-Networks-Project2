@@ -12,7 +12,6 @@ namespace Presentation.Controllers
 
         public PlanInfoController(IServiceManager serviceManager) => _service = serviceManager;
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllPlanInfo()
         {
