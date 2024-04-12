@@ -10,7 +10,6 @@ namespace Repository.Contracts
     public interface IMonthlyBillRepository : IRepository<MonthlyBill>
     {
         Task<IEnumerable<MonthlyBill>> GetBillsByUserIdAsync(int userId);
-
-
+        Task<MonthlyBill> GetMonthlyBillByUserAndMonth(int userId, int year, int month);
     }
 }

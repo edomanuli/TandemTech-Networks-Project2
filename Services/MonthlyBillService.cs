@@ -24,23 +24,35 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<MonthlyBillDto>> GetBillsByUserIdAsync(int userId)
+        public async Task<MonthlyBillDto> GetUserBill(int userId)
         {
-            var bills = await _repositoryManager.MonthlyBill.GetBillsByUserIdAsync(userId);
-            return _mapper.Map<IEnumerable<MonthlyBillDto>>(bills);
-        }
+            // Check if user exists
+            var user = await _repositoryManager.User.GetByIdAsync(userId);
+            if (user == null)
+            {
+                //throw new UserNotFoundException(userId);
+            }
 
-        public async Task<bool> MarkBillAsPaidAsync(int billId)
-        {
-            var bill = await _repositoryManager.MonthlyBill.GetByIdAsync(billId);
-            if (bill == null) {
-                throw new MonthlyBillNotFoundException(billId);
-            };
+            var now = DateTime.UtcNow;
+            var year = now.Year;
+            var month = now.Month;
 
-            bill.IsPaid = true;
-            _repositoryManager.MonthlyBill.Update(bill);
-            await _repositoryManager.SaveAsync();
-            return true;
+            var bill = await _repositoryManager.MonthlyBill.GetMonthlyBillByUserAndMonth(userId, year, month);
+            
+            // Return generic monthly bill if none found
+            if (bill == null)
+            {
+                return new MonthlyBillDto
+                {
+                    Total = 0,
+                    IsPayed = false,
+                    BillingDate = new DateTime(year, month, 1),
+                    UserId = userId,
+                }; ;
+            }
+
+            var monthlyBillDto = _mapper.Map<MonthlyBillDto>(bill);
+            return monthlyBillDto;
         }
     }
 }
