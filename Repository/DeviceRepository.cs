@@ -31,5 +31,18 @@ namespace Repository
                 .Include(d => d.DeviceInfo)
                 .SingleOrDefaultAsync(d => d.Id == deviceId);
         }
+
+        public void CreateDevice(Device device)
+        {
+            if (device == null)
+                throw new ArgumentNullException(nameof(device));
+
+            if (RepositoryContext.Entry(device.AssignedNumber).State == EntityState.Detached)
+            {
+                RepositoryContext.AssignedNumbers.Attach(device.AssignedNumber);
+            }
+
+            RepositoryContext.Devices.Add(device);
+        }
     }
 }

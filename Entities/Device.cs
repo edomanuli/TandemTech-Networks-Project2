@@ -16,7 +16,7 @@ namespace Entities
         public string Name { get; set; }
         public string Serial { get; set; }
 
-        public AssignedNumber AssignedNumber { get; set; }
-        public DeviceInfo DeviceInfo { get; set; }
+        public AssignedNumber? AssignedNumber { get; set; }
+        public DeviceInfo? DeviceInfo { get; set; }
     }
 }

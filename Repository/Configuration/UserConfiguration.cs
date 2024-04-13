@@ -35,7 +35,7 @@ namespace Repository.Configuration
 
             var anuli = new User
             {
-                Id = 3,
+                Id = 1,
                 UserName = "anuli",
                 NormalizedUserName = "ANULI",
                 Email = "anuli@example.com",
@@ -47,7 +47,7 @@ namespace Repository.Configuration
 
             var chris = new User
             {
-                Id = 5,
+                Id = 2,
                 UserName = "chris",
                 NormalizedUserName = "CHRIS",
                 Email = "CHRIS@example.com",
@@ -59,15 +59,7 @@ namespace Repository.Configuration
 
             builder.HasData(
                 anuli,
-                chris,
-                new User { Id = 1, FirstName = "Olivia", LastName = "Brown", Email = "olivia.brown@example.com" },
-                new User { Id = 4, FirstName = "Noah", LastName = "Jones", Email = "noah.jones@example.com" },
-                new User { Id = 2, FirstName = "Ava", LastName = "Garcia", Email = "ava.garcia@example.com" },
-                new User { Id = 6, FirstName = "Oliver", LastName = "Miller", Email = "oliver.miller@example.com" },
-                new User { Id = 7, FirstName = "Isabella", LastName = "Davis", Email = "isabella.davis@example.com" },
-                new User { Id = 8, FirstName = "Ethan", LastName = "Martinez", Email = "ethan.martinez@example.com" },
-                new User { Id = 9, FirstName = "Sophia", LastName = "Rodriguez", Email = "sophia.rodriguez@example.com" },
-                new User { Id = 10, FirstName = "Jacob", LastName = "Wilson", Email = "jacob.wilson@example.com" }
+                chris
              );
         }
     }

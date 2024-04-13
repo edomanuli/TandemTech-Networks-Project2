@@ -30,6 +30,10 @@ namespace TandemTechAPI
 
             CreateMap<Device, DeviceDto>();
             CreateMap<DeviceInfo, DeviceInfoDto>();
+
+            CreateMap<DeviceCreateDto, Device>()
+             .ForMember(dest => dest.AssignedNumber, opt => opt.Ignore())
+             .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
