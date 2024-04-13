@@ -8,6 +8,9 @@ using Repository.Contracts;
 using Service.Contracts;
 using DTOs;
 using Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Numerics;
+using AutoMapper.Internal.Mappers;
 
 namespace Service
 {
@@ -37,6 +40,13 @@ namespace Service
             {
                 throw new KeyNotFoundException("Device not found.");
             }
+
+            var number = await _repositoryManager.AssignedNumber.GetByIdAsync(device.AssignedNumberId);
+            if (number != null)
+            {
+                _repositoryManager.AssignedNumber.Delete(number);
+            }
+
             _repositoryManager.Device.Delete(device);
             await _repositoryManager.SaveAsync();
         }
@@ -60,6 +70,9 @@ namespace Service
                 throw new ArgumentException("Invalid user plan ID or user plan does not belong to the user.");
             }
 
+            //TODO: Check if device info exists
+
+
             // Check device limit
             if (userPlan.AssignedNumbers.Count >= userPlan.PlanInfo.DeviceLimit)
             {
@@ -73,16 +86,21 @@ namespace Service
                 throw new InvalidOperationException("No available phone numbers.");
             }
 
-            // Create the device and assign the number
-            var device = _mapper.Map<Device>(deviceDto);
-            device.AssignedNumber = new AssignedNumber
+            // Create the device
+            var device = new Device
             {
-                UserPlanId = userPlan.Id,
-                PhoneNumberId = phoneNumber.Id
+                Name = deviceDto.Name,
+                Serial = deviceDto.Serial,
+                DeviceInfoId = deviceDto.DeviceInfoId,
+                AssignedNumber = new AssignedNumber
+                {
+                    UserPlanId = userPlan.Id,
+                    PhoneNumberId = phoneNumber.Id
+                }
             };
 
             _repositoryManager.Device.Create(device);
-            await _repositoryManager.SaveAsync();
+            await _repositoryManager.SaveAsync(); 
 
             return _mapper.Map<DeviceDto>(device);
         }

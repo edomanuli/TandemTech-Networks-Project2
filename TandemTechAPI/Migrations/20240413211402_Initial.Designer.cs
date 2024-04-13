@@ -12,7 +12,7 @@ using Repository;
 namespace TandemTechAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240412140307_Initial")]
+    [Migration("20240413211402_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -59,7 +59,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 2,
                             PhoneNumberId = 6,
-                            UserPlanId = 3
+                            UserPlanId = 2
                         },
                         new
                         {
@@ -71,140 +71,29 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 4,
                             PhoneNumberId = 8,
-                            UserPlanId = 3
+                            UserPlanId = 4
                         },
                         new
                         {
                             Id = 5,
                             PhoneNumberId = 9,
-                            UserPlanId = 3
+                            UserPlanId = 5
                         },
                         new
                         {
                             Id = 6,
                             PhoneNumberId = 10,
-                            UserPlanId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            PhoneNumberId = 11,
-                            UserPlanId = 4
-                        },
-                        new
-                        {
-                            Id = 8,
-                            PhoneNumberId = 12,
-                            UserPlanId = 5
-                        },
-                        new
-                        {
-                            Id = 9,
-                            PhoneNumberId = 13,
-                            UserPlanId = 5
-                        },
-                        new
-                        {
-                            Id = 10,
-                            PhoneNumberId = 14,
                             UserPlanId = 6
-                        },
-                        new
-                        {
-                            Id = 11,
-                            PhoneNumberId = 15,
-                            UserPlanId = 6
-                        },
-                        new
-                        {
-                            Id = 12,
-                            PhoneNumberId = 16,
-                            UserPlanId = 7
-                        },
-                        new
-                        {
-                            Id = 13,
-                            PhoneNumberId = 17,
-                            UserPlanId = 7
-                        },
-                        new
-                        {
-                            Id = 14,
-                            PhoneNumberId = 18,
-                            UserPlanId = 8
-                        },
-                        new
-                        {
-                            Id = 15,
-                            PhoneNumberId = 19,
-                            UserPlanId = 9
-                        },
-                        new
-                        {
-                            Id = 16,
-                            PhoneNumberId = 20,
-                            UserPlanId = 9
-                        },
-                        new
-                        {
-                            Id = 18,
-                            PhoneNumberId = 22,
-                            UserPlanId = 11
-                        },
-                        new
-                        {
-                            Id = 19,
-                            PhoneNumberId = 23,
-                            UserPlanId = 11
-                        },
-                        new
-                        {
-                            Id = 20,
-                            PhoneNumberId = 24,
-                            UserPlanId = 12
-                        },
-                        new
-                        {
-                            Id = 21,
-                            PhoneNumberId = 25,
-                            UserPlanId = 13
-                        },
-                        new
-                        {
-                            Id = 22,
-                            PhoneNumberId = 2,
-                            UserPlanId = 14
-                        },
-                        new
-                        {
-                            Id = 23,
-                            PhoneNumberId = 3,
-                            UserPlanId = 16
-                        },
-                        new
-                        {
-                            Id = 24,
-                            PhoneNumberId = 4,
-                            UserPlanId = 17
-                        },
-                        new
-                        {
-                            Id = 25,
-                            PhoneNumberId = 5,
-                            UserPlanId = 17
-                        },
-                        new
-                        {
-                            Id = 26,
-                            PhoneNumberId = 21,
-                            UserPlanId = 18
                         });
                 });
 
             modelBuilder.Entity("Entities.Device", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AssignedNumberId")
                         .HasColumnType("int");
@@ -226,6 +115,8 @@ namespace TandemTechAPI.Migrations
 
                     b.HasIndex("AssignedNumberId")
                         .IsUnique();
+
+                    b.HasIndex("DeviceInfoId");
 
                     b.ToTable("Devices");
 
@@ -277,142 +168,6 @@ namespace TandemTechAPI.Migrations
                             DeviceInfoId = 2,
                             Name = "Sara's iPhone 13 Pro",
                             Serial = "LM11223"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AssignedNumberId = 7,
-                            DeviceInfoId = 14,
-                            Name = "Brother's Pixel 4 XL",
-                            Serial = "OV44444"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AssignedNumberId = 8,
-                            DeviceInfoId = 18,
-                            Name = "Sister's OnePlus Nord 2",
-                            Serial = "OV55555"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AssignedNumberId = 9,
-                            DeviceInfoId = 12,
-                            Name = "Grandpa's Pixel 5a",
-                            Serial = "OV66666"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AssignedNumberId = 10,
-                            DeviceInfoId = 20,
-                            Name = "Grandma's OnePlus 8 Pro",
-                            Serial = "OV77777"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AssignedNumberId = 11,
-                            DeviceInfoId = 7,
-                            Name = "Uncle's Galaxy Note 20",
-                            Serial = "OV88888"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AssignedNumberId = 12,
-                            DeviceInfoId = 4,
-                            Name = "Aunt's iPhone SE",
-                            Serial = "NH12121"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            AssignedNumberId = 13,
-                            DeviceInfoId = 10,
-                            Name = "Cousin's Galaxy S20 FE",
-                            Serial = "NH23232"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AssignedNumberId = 14,
-                            DeviceInfoId = 17,
-                            Name = "My OnePlus 9",
-                            Serial = "AV99999"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AssignedNumberId = 15,
-                            DeviceInfoId = 25,
-                            Name = "Xiaomi Mi Mix 4",
-                            Serial = "AV88888"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AssignedNumberId = 16,
-                            DeviceInfoId = 13,
-                            Name = "Pixel 4a 5G",
-                            Serial = "AV77777"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            AssignedNumberId = 18,
-                            DeviceInfoId = 23,
-                            Name = "Xiaomi Mi 11 Lite",
-                            Serial = "OL54321"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            AssignedNumberId = 19,
-                            DeviceInfoId = 11,
-                            Name = "Google Pixel 6",
-                            Serial = "OL98765"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            AssignedNumberId = 21,
-                            DeviceInfoId = 19,
-                            Name = "OnePlus 8T",
-                            Serial = "IS24680"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            AssignedNumberId = 22,
-                            DeviceInfoId = 8,
-                            Name = "Samsung Galaxy A52",
-                            Serial = "ET56789"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            AssignedNumberId = 23,
-                            DeviceInfoId = 16,
-                            Name = "OnePlus 9 Pro",
-                            Serial = "SP98765"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            AssignedNumberId = 24,
-                            DeviceInfoId = 1,
-                            Name = "iPhone 13",
-                            Serial = "SP54321"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            AssignedNumberId = 26,
-                            DeviceInfoId = 8,
-                            Name = "Jacob's Phone",
-                            Serial = "JC13579"
                         });
                 });
 
@@ -621,88 +376,6 @@ namespace TandemTechAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("MonthlyBills");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 30m,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = false,
-                            Total = 60m,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 120m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = false,
-                            Total = 40m,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 70m,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = false,
-                            Total = 110m,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 60m,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 30m,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 9,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = false,
-                            Total = 100m,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 10,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsPaid = true,
-                            Total = 60m,
-                            UserId = 10
-                        });
                 });
 
             modelBuilder.Entity("Entities.PhoneNumber", b =>
@@ -904,120 +577,6 @@ namespace TandemTechAPI.Migrations
                     b.HasIndex("BillId");
 
                     b.ToTable("PlanBills");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 30m,
-                            BillId = 1,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 60m,
-                            BillId = 2,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 30m,
-                            BillId = 3,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 30m,
-                            BillId = 3,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Amount = 60m,
-                            BillId = 3,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Amount = 40m,
-                            BillId = 4,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Amount = 30m,
-                            BillId = 5,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Amount = 40m,
-                            BillId = 5,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Amount = 30m,
-                            BillId = 6,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Amount = 40m,
-                            BillId = 6,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Amount = 40m,
-                            BillId = 6,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Amount = 60m,
-                            BillId = 7,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Amount = 30m,
-                            BillId = 8,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Amount = 40m,
-                            BillId = 9,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Amount = 60m,
-                            BillId = 9,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Amount = 60m,
-                            BillId = 10,
-                            BillingDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Entities.PlanInfo", b =>
@@ -1160,9 +719,9 @@ namespace TandemTechAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3,
+                            Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5a102ae3-ac00-4efb-b4e9-9a6c5c375d86",
+                            ConcurrencyStamp = "d0084c57-57f8-4652-a515-e77f4b286968",
                             Email = "anuli@example.com",
                             EmailConfirmed = false,
                             FirstName = "Anuli",
@@ -1170,16 +729,16 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANULI@EXAMPLE.COM",
                             NormalizedUserName = "ANULI",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBNUs4KfQwaoIxzhUHwDOCnpbW5DlCnhQ6WXrffa4ah3fNkWJTfeqqOR8mkeg5+fbA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENSlEqNvL9u9O+Uae4NpWFX7pht/79xOjHvpeUUtuKiQrHBL27Up2i6N9Tlipsamlw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "anuli"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ecfbd5c5-5dd7-40e7-bc01-f179b6d86865",
+                            ConcurrencyStamp = "4783bd90-9002-49d2-b75e-25345b481267",
                             Email = "CHRIS@example.com",
                             EmailConfirmed = false,
                             FirstName = "Chris",
@@ -1187,114 +746,10 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CHRIS@EXAMPLE.COM",
                             NormalizedUserName = "CHRIS",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPr2ETSGmkcOaydJUKLWMBHqjj4PtKLiRGYGXPR/89vMFaSF82X97QQbPa9fXO/jjw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBh3w+A/LNoHlGK94p8pGqFMKA35oCuJoS2qA9BIiR8rKE17bBLSBdO5gq9zd2fXkA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "chris"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5a174ba-970d-4ba2-b8ad-e8dd7eb24e5e",
-                            Email = "olivia.brown@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Olivia",
-                            LastName = "Brown",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "09ee2ef8-f0ea-4ee2-ab29-fce10714292d",
-                            Email = "noah.jones@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Noah",
-                            LastName = "Jones",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8ecd2e4-140c-4676-a499-0bd7c661ac9e",
-                            Email = "ava.garcia@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Ava",
-                            LastName = "Garcia",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa8872eb-5edb-4330-9462-8c10ef5d0f6b",
-                            Email = "oliver.miller@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Oliver",
-                            LastName = "Miller",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d5c2d10d-aad5-41a6-9896-6a2317388123",
-                            Email = "isabella.davis@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Isabella",
-                            LastName = "Davis",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cbc8d48b-3841-46b8-8f9d-d1ac3b48e23a",
-                            Email = "ethan.martinez@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Ethan",
-                            LastName = "Martinez",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a0581608-7288-4884-8180-4e4bcf0d20c0",
-                            Email = "sophia.rodriguez@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Sophia",
-                            LastName = "Rodriguez",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e49519d-6daa-44ef-909c-a099b43cc36d",
-                            Email = "jacob.wilson@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Jacob",
-                            LastName = "Wilson",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
                         });
                 });
 
@@ -1327,114 +782,44 @@ namespace TandemTechAPI.Migrations
                         new
                         {
                             Id = 1,
-                            EnrollmentDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlanInfoId = 1,
                             UserId = 1
                         },
                         new
                         {
+                            Id = 2,
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PlanInfoId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
                             Id = 3,
-                            EnrollmentDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlanInfoId = 3,
-                            UserId = 2
+                            UserId = 1
                         },
                         new
                         {
                             Id = 4,
-                            EnrollmentDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlanInfoId = 1,
-                            UserId = 3
+                            UserId = 2
                         },
                         new
                         {
                             Id = 5,
-                            EnrollmentDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 1,
-                            UserId = 3
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PlanInfoId = 2,
+                            UserId = 2
                         },
                         new
                         {
                             Id = 6,
-                            EnrollmentDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EnrollmentDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlanInfoId = 3,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            EnrollmentDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 2,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 8,
-                            EnrollmentDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 1,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 9,
-                            EnrollmentDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 2,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 10,
-                            EnrollmentDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 1,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 11,
-                            EnrollmentDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 2,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 12,
-                            EnrollmentDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 2,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 13,
-                            EnrollmentDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 3,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 14,
-                            EnrollmentDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 1,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 16,
-                            EnrollmentDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 2,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 17,
-                            EnrollmentDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 3,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 18,
-                            EnrollmentDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlanInfoId = 3,
-                            UserId = 10
+                            UserId = 2
                         });
                 });
 
@@ -1593,14 +978,14 @@ namespace TandemTechAPI.Migrations
             modelBuilder.Entity("Entities.Device", b =>
                 {
                     b.HasOne("Entities.AssignedNumber", "AssignedNumber")
-                        .WithOne("Device")
+                        .WithOne()
                         .HasForeignKey("Entities.Device", "AssignedNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entities.DeviceInfo", "DeviceInfo")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("DeviceInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1699,11 +1084,6 @@ namespace TandemTechAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.AssignedNumber", b =>
-                {
-                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("Entities.MonthlyBill", b =>

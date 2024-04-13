@@ -8,9 +8,9 @@ namespace DTOs
 {
     public record DeviceCreateDto
     {
+        public int UserPlanId { get; set; }
+        public int DeviceInfoId { get; set; }
         public string Name { get; set; }
         public string Serial { get; set; }
-        public int DeviceInfoId { get; set; }
-        public int UserPlanId { get; set; }
     }
 }

@@ -308,7 +308,8 @@ namespace TandemTechAPI.Migrations
                 name: "Devices",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AssignedNumberId = table.Column<int>(type: "int", nullable: false),
                     DeviceInfoId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -324,8 +325,8 @@ namespace TandemTechAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Devices_DeviceInfo_Id",
-                        column: x => x.Id,
+                        name: "FK_Devices_DeviceInfo_DeviceInfoId",
+                        column: x => x.DeviceInfoId,
                         principalTable: "DeviceInfo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -336,16 +337,8 @@ namespace TandemTechAPI.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "b5a174ba-970d-4ba2-b8ad-e8dd7eb24e5e", "olivia.brown@example.com", false, "Olivia", "Brown", false, null, null, null, null, null, false, null, false, null },
-                    { 2, 0, "c8ecd2e4-140c-4676-a499-0bd7c661ac9e", "ava.garcia@example.com", false, "Ava", "Garcia", false, null, null, null, null, null, false, null, false, null },
-                    { 3, 0, "5a102ae3-ac00-4efb-b4e9-9a6c5c375d86", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAEBNUs4KfQwaoIxzhUHwDOCnpbW5DlCnhQ6WXrffa4ah3fNkWJTfeqqOR8mkeg5+fbA==", null, false, null, false, "anuli" },
-                    { 4, 0, "09ee2ef8-f0ea-4ee2-ab29-fce10714292d", "noah.jones@example.com", false, "Noah", "Jones", false, null, null, null, null, null, false, null, false, null },
-                    { 5, 0, "ecfbd5c5-5dd7-40e7-bc01-f179b6d86865", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAEPr2ETSGmkcOaydJUKLWMBHqjj4PtKLiRGYGXPR/89vMFaSF82X97QQbPa9fXO/jjw==", null, false, null, false, "chris" },
-                    { 6, 0, "aa8872eb-5edb-4330-9462-8c10ef5d0f6b", "oliver.miller@example.com", false, "Oliver", "Miller", false, null, null, null, null, null, false, null, false, null },
-                    { 7, 0, "d5c2d10d-aad5-41a6-9896-6a2317388123", "isabella.davis@example.com", false, "Isabella", "Davis", false, null, null, null, null, null, false, null, false, null },
-                    { 8, 0, "cbc8d48b-3841-46b8-8f9d-d1ac3b48e23a", "ethan.martinez@example.com", false, "Ethan", "Martinez", false, null, null, null, null, null, false, null, false, null },
-                    { 9, 0, "a0581608-7288-4884-8180-4e4bcf0d20c0", "sophia.rodriguez@example.com", false, "Sophia", "Rodriguez", false, null, null, null, null, null, false, null, false, null },
-                    { 10, 0, "7e49519d-6daa-44ef-909c-a099b43cc36d", "jacob.wilson@example.com", false, "Jacob", "Wilson", false, null, null, null, null, null, false, null, false, null }
+                    { 1, 0, "d0084c57-57f8-4652-a515-e77f4b286968", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAENSlEqNvL9u9O+Uae4NpWFX7pht/79xOjHvpeUUtuKiQrHBL27Up2i6N9Tlipsamlw==", null, false, null, false, "anuli" },
+                    { 2, 0, "4783bd90-9002-49d2-b75e-25345b481267", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAEBh3w+A/LNoHlGK94p8pGqFMKA35oCuJoS2qA9BIiR8rKE17bBLSBdO5gq9zd2fXkA==", null, false, null, false, "chris" }
                 });
 
             migrationBuilder.InsertData(
@@ -423,43 +416,16 @@ namespace TandemTechAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MonthlyBills",
-                columns: new[] { "Id", "BillingDate", "IsPaid", "Total", "UserId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 30m, 1 },
-                    { 2, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 60m, 2 },
-                    { 3, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 120m, 3 },
-                    { 4, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 40m, 4 },
-                    { 5, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 70m, 5 },
-                    { 6, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 110m, 6 },
-                    { 7, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 60m, 7 },
-                    { 8, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 30m, 8 },
-                    { 9, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 100m, 9 },
-                    { 10, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 60m, 10 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "UserPlans",
                 columns: new[] { "Id", "EnrollmentDate", "PlanInfoId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
-                    { 3, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
-                    { 4, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3 },
-                    { 5, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3 },
-                    { 6, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3 },
-                    { 7, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 4 },
-                    { 8, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 5 },
-                    { 9, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 5 },
-                    { 10, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 6 },
-                    { 11, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6 },
-                    { 12, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6 },
-                    { 13, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 7 },
-                    { 14, new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 8 },
-                    { 16, new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 9 },
-                    { 17, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 9 },
-                    { 18, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 10 }
+                    { 1, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 2, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1 },
+                    { 3, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1 },
+                    { 4, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 },
+                    { 5, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
+                    { 6, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -468,53 +434,11 @@ namespace TandemTechAPI.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 1 },
-                    { 2, 6, 3 },
+                    { 2, 6, 2 },
                     { 3, 7, 3 },
-                    { 4, 8, 3 },
-                    { 5, 9, 3 },
-                    { 6, 10, 3 },
-                    { 7, 11, 4 },
-                    { 8, 12, 5 },
-                    { 9, 13, 5 },
-                    { 10, 14, 6 },
-                    { 11, 15, 6 },
-                    { 12, 16, 7 },
-                    { 13, 17, 7 },
-                    { 14, 18, 8 },
-                    { 15, 19, 9 },
-                    { 16, 20, 9 },
-                    { 18, 22, 11 },
-                    { 19, 23, 11 },
-                    { 20, 24, 12 },
-                    { 21, 25, 13 },
-                    { 22, 2, 14 },
-                    { 23, 3, 16 },
-                    { 24, 4, 17 },
-                    { 25, 5, 17 },
-                    { 26, 21, 18 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "PlanBills",
-                columns: new[] { "Id", "Amount", "BillId", "BillingDate" },
-                values: new object[,]
-                {
-                    { 1, 30m, 1, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 60m, 2, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 30m, 3, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 30m, 3, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 60m, 3, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 40m, 4, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 30m, 5, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 40m, 5, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, 30m, 6, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, 40m, 6, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, 40m, 6, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, 60m, 7, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, 30m, 8, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, 40m, 9, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, 60m, 9, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 16, 60m, 10, new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 4, 8, 4 },
+                    { 5, 9, 5 },
+                    { 6, 10, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -527,24 +451,7 @@ namespace TandemTechAPI.Migrations
                     { 3, 3, 15, "Dad's Pixel 3a", "LM98765" },
                     { 4, 4, 22, "Mom's Xiaomi Redmi Note 11", "LM13579" },
                     { 5, 5, 6, "My Samsung Galaxy S21", "LM24680" },
-                    { 6, 6, 2, "Sara's iPhone 13 Pro", "LM11223" },
-                    { 7, 7, 14, "Brother's Pixel 4 XL", "OV44444" },
-                    { 8, 8, 18, "Sister's OnePlus Nord 2", "OV55555" },
-                    { 9, 9, 12, "Grandpa's Pixel 5a", "OV66666" },
-                    { 10, 10, 20, "Grandma's OnePlus 8 Pro", "OV77777" },
-                    { 11, 11, 7, "Uncle's Galaxy Note 20", "OV88888" },
-                    { 12, 12, 4, "Aunt's iPhone SE", "NH12121" },
-                    { 13, 13, 10, "Cousin's Galaxy S20 FE", "NH23232" },
-                    { 14, 14, 17, "My OnePlus 9", "AV99999" },
-                    { 15, 15, 25, "Xiaomi Mi Mix 4", "AV88888" },
-                    { 16, 16, 13, "Pixel 4a 5G", "AV77777" },
-                    { 18, 18, 23, "Xiaomi Mi 11 Lite", "OL54321" },
-                    { 19, 19, 11, "Google Pixel 6", "OL98765" },
-                    { 20, 21, 19, "OnePlus 8T", "IS24680" },
-                    { 21, 22, 8, "Samsung Galaxy A52", "ET56789" },
-                    { 22, 23, 16, "OnePlus 9 Pro", "SP98765" },
-                    { 23, 24, 1, "iPhone 13", "SP54321" },
-                    { 24, 26, 8, "Jacob's Phone", "JC13579" }
+                    { 6, 6, 2, "Sara's iPhone 13 Pro", "LM11223" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -602,6 +509,11 @@ namespace TandemTechAPI.Migrations
                 table: "Devices",
                 column: "AssignedNumberId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_DeviceInfoId",
+                table: "Devices",
+                column: "DeviceInfoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MonthlyBills_UserId",

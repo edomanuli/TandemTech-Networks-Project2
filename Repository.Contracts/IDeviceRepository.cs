@@ -11,6 +11,6 @@ namespace Repository.Contracts
     {
         Task<IEnumerable<Device>> GetDevicesByUserIdAsync(int userId);
         Task<Device> GetDeviceByIdAsync(int deviceId);
-
+        void CreateDevice(Device device);
     }
 }
