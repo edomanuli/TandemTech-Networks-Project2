@@ -90,7 +90,7 @@ namespace Service
                 issuer: jwtSettings["validIssuer"],
                 audience: jwtSettings["validAudience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.UtcNow.AddHours(10),
                 signingCredentials: credentials
             );
 
