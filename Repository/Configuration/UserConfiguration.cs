@@ -19,17 +19,6 @@ namespace Repository.Configuration
                    .IsRequired()
                    .HasMaxLength(50);
 
-            // Relationships
-            builder.HasMany(u => u.UserPlans)
-                   .WithOne(up => up.User)
-                   .HasForeignKey(up => up.UserId)
-                   .IsRequired();
-
-            builder.HasMany(u => u.Bills)
-                   .WithOne(b => b.User)
-                   .HasForeignKey(b => b.UserId)
-                   .IsRequired();
-
             //Seed Data
             var hasher = new PasswordHasher<User>();
 

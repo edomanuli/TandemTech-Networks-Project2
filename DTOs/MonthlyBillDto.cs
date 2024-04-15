@@ -12,17 +12,7 @@ namespace DTOs
         public int UserId { get; set; }
         public DateTime BillingDate { get; set; }
         public decimal Total { get; set; }
-        public bool IsPayed { get; set; } = false;
+        public bool IsPaid { get; set; } = false;
         public IEnumerable<PlanBillDto> PlanBills { get; set; }
-    }
-
-    public record MonthlyBillCreateDto
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public DateTime BillingDate { get; set; }
-        public decimal Total { get; set; }
-        public bool IsPayed { get; set; } = false;
-        public ICollection<PlanBillDto>? PlanBills { get; set; }
     }
 }

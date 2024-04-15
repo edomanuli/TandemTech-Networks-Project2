@@ -8,19 +8,19 @@ namespace Repository.Configuration
     {
         public void Configure(EntityTypeBuilder<PlanBill> builder)
         {
+            // Primary Key
+            builder.HasKey(pb => pb.Id);
+
             // Properties
-            builder.HasKey(bl => bl.Id);
-            builder.Property(bl => bl.BillingDate).IsRequired();
-            builder.Property(bl => bl.Amount).IsRequired().HasPrecision(18, 2);
+            builder.Property(pb => pb.Amount)
+                   .IsRequired()
+                   .HasPrecision(18, 2);
 
             // Relationships
-            builder.HasOne(bl => bl.MonthlyBill)
-                   .WithMany(b => b.PlanBills)
-                   .HasForeignKey(bl => bl.BillId);
 
-            // Seed data
-
-
+            builder.HasOne(pb => pb.UserPlan)
+                   .WithMany()
+                   .HasForeignKey(pb => pb.UserPlanId);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DTOs;
+using Entities;
 using Entities.Exceptions;
 using Repository.Contracts;
 using Service.Contracts;
@@ -30,29 +31,41 @@ namespace Service
             var user = await _repositoryManager.User.GetByIdAsync(userId);
             if (user == null)
             {
-                //throw new UserNotFoundException(userId);
+                throw new Exception($"No user found with ID {userId}.");
             }
 
             var now = DateTime.UtcNow;
             var year = now.Year;
             var month = now.Month;
 
+            // If monthly bill exists, return it
             var bill = await _repositoryManager.MonthlyBill.GetMonthlyBillByUserAndMonth(userId, year, month);
-            
-            // Return generic monthly bill if none found
-            if (bill == null)
+            if (bill != null)
             {
-                return new MonthlyBillDto
-                {
-                    Total = 0,
-                    IsPayed = false,
-                    BillingDate = new DateTime(year, month, 1),
-                    UserId = userId,
-                }; ;
+                return _mapper.Map<MonthlyBillDto>(bill);
             }
 
-            var monthlyBillDto = _mapper.Map<MonthlyBillDto>(bill);
-            return monthlyBillDto;
+            // If no monthly bill, create one
+            var billingDate = new DateTime(year, month, 1);
+            var userPlans = await _repositoryManager.UserPlan.GetByUserIdAsync(userId);
+            var eligibleUserPlans = userPlans.Where(up => up.EnrollmentDate < billingDate).ToList();
+
+            var newBill = new MonthlyBill
+            {
+                UserId = userId,
+                BillingDate = billingDate,
+                Total = eligibleUserPlans.Sum(up => up.PlanInfo.Price),
+                IsPaid = false,
+                PlanBills = eligibleUserPlans.Select(up => new PlanBill
+                {
+                    UserPlanId = up.Id,
+                    Amount = up.PlanInfo.Price
+                }).ToList()
+            };
+
+            _repositoryManager.MonthlyBill.Create(newBill);
+            await _repositoryManager.SaveAsync();
+            return _mapper.Map<MonthlyBillDto>(newBill);
         }
     }
 }
