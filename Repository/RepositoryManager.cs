@@ -19,6 +19,7 @@ namespace Repository
         private readonly Lazy<IPhoneNumberRepository> _phoneNumberRepository;
         private readonly Lazy<IMonthlyBillRepository> _monthlyBillRepository;
         private readonly Lazy<IDeviceRepository> _deviceRepository;
+        private readonly Lazy<IDeviceInfoRepository> _deviceInfoRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -30,6 +31,7 @@ namespace Repository
             _phoneNumberRepository = new Lazy<IPhoneNumberRepository>(() => new PhoneNumberRepository(_repositoryContext));
             _monthlyBillRepository = new Lazy<IMonthlyBillRepository>(() => new MonthlyBillRepository(_repositoryContext));
             _deviceRepository = new Lazy<IDeviceRepository>(() => new DeviceRepository(_repositoryContext));
+            _deviceInfoRepository = new Lazy<IDeviceInfoRepository>(() => new DeviceInfoRepository(_repositoryContext));
         }
 
         public IUserRepository User => _userRepository.Value;
@@ -39,6 +41,7 @@ namespace Repository
         public IPhoneNumberRepository PhoneNumber => _phoneNumberRepository.Value;
         public IMonthlyBillRepository MonthlyBill => _monthlyBillRepository.Value;
         public IDeviceRepository Device => _deviceRepository.Value;
+        public IDeviceInfoRepository DeviceInfo => _deviceInfoRepository.Value;
 
         public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
     }
