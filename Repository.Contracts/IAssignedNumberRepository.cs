@@ -12,6 +12,7 @@ namespace Repository.Contracts
     {
         Task<IEnumerable<AssignedNumber>> GetAssignedNumbersByUserIdAsync(int userId);
         Task<IEnumerable<AssignedNumber>> GetByUserPlanIdAsync(int userPlanId);
+        Task<AssignedNumber> GetAssignedNumberByIdAsync(int id);
     }
 
 }

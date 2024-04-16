@@ -49,6 +49,15 @@ namespace Presentation.Controllers
             return Ok(devices); // Return the list of devices
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> AddDevice([FromBody] DeviceCreateDto deviceDto)
+        {
+            int userId = GetUserId();
+            var device = await _service.Device.AddDeviceAsync(userId, deviceDto);
+            return Ok(device);
+        }
+
         // DELETE: api/user/devices/5
         [HttpDelete("{deviceId}")]
         public async Task<IActionResult> DeleteUserDevice(int deviceId)
@@ -62,18 +71,26 @@ namespace Presentation.Controllers
                 return NotFound("Device not found.");
             }
 
-            // TOD: Check if user owns device
 
             await _service.Device.DeleteDeviceAsync(deviceId);
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddDevice([FromBody] DeviceCreateDto deviceDto)
+        [HttpPut("{deviceId}")]
+        public async Task<IActionResult> AssignDeviceNumber(int deviceId, [FromBody] AssignDeviceNumberDto assignDto)
         {
             int userId = GetUserId();
-            var device = await _service.Device.AddDeviceAsync(userId, deviceDto);
-            return Ok(device);
+
+            // Get the device
+            var device = await _service.Device.GetDeviceByIdAsync(deviceId);
+            if (device == null)
+            {
+                return NotFound("Device not found.");
+            }
+
+
+            var deviceDto = await _service.Device.AssignDeviceNumber(deviceId, assignDto.AssignedNumberId);
+            return Ok(deviceDto);
         }
     }
 }

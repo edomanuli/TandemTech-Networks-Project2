@@ -13,5 +13,6 @@ namespace Service.Contracts
         Task DeleteDeviceAsync(int deviceId);
         Task<DeviceDto> GetDeviceByIdAsync(int deviceId);
         Task<DeviceDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto);
+        Task<DeviceDto> AssignDeviceNumber(int deviceId, int assignedNumberId);
     }
 }
