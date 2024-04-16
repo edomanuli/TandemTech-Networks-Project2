@@ -1,16 +1,19 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [Route("api/number")]
     [ApiController]
+    [Route("api/user/numbers")]
+    [Authorize]
     public class AssignedNumbersController : ControllerBase
     {
         private readonly IServiceManager _service;
@@ -20,36 +23,30 @@ namespace Presentation.Controllers
             _service = service;
         }
 
+        protected int GetUserId()
+        {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                throw new UnauthorizedAccessException("User ID is missing.");
+            }
+
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                throw new ArgumentException("User ID is invalid.");
+            }
+
+            return userId;
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AssignedNumberDto>>> GetAllAssignedNumbers()
+        public async Task<IActionResult> GetUserDevices()
         {
-            var assignedNumbers = await _service.AssignedNumber.GetAllAsync();
-            return Ok(assignedNumbers);
+            int userId = GetUserId();
+            var numbers = await _service.AssignedNumber.GetAssignedNumbersByUserId(userId);
+            return Ok(numbers); 
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var assignedNumber = await _service.AssignedNumber.GetByIdAsync(id);
-            if (assignedNumber == null)
-                return NotFound();
-
-            return Ok(assignedNumber);
-        }
-
-        [HttpGet("plan/{planId}")]
-        public async Task<ActionResult<IEnumerable<AssignedNumberDto>>> GetByPlanId(int planId)
-        {
-            try
-            {
-                var assignedNumbers = await _service.AssignedNumber.GetByUserPlanIdAsync(planId);
-                return Ok(assignedNumbers);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
     }
 
 }

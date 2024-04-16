@@ -14,18 +14,4 @@ namespace DTOs
         public PhoneNumberDto? PhoneNumber { get; set; }
         public UserPlanDto? UserPlan { get; set; }
     }
-
-    public record AssignedNumberCreateDto
-    {
-        public int Id { get; set; }
-        public int PhoneNumberId { get; set; }
-        public int UserPlanId { get; set; }
-    }
-
-    public record AssignedNumberUpdateDto
-    {
-        public int Id { get; set; }
-        public int PhoneNumberId { get; set; }
-        public int UserPlanId { get; set; }
-    }
 }
