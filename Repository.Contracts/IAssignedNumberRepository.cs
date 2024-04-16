@@ -10,6 +10,7 @@ namespace Repository.Contracts
 {
     public interface IAssignedNumberRepository : IRepository<AssignedNumber>
     {
+        Task<IEnumerable<AssignedNumber>> GetAssignedNumbersByUserIdAsync(int userId);
         Task<IEnumerable<AssignedNumber>> GetByUserPlanIdAsync(int userPlanId);
     }
 

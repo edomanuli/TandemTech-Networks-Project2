@@ -25,56 +25,10 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<AssignedNumberDto> CreateAsync(AssignedNumberCreateDto createDto)
+        public async Task<IEnumerable<AssignedNumberDto>> GetAssignedNumbersByUserId(int userId)
         {
-            var assignedNumber = _mapper.Map<AssignedNumber>(createDto);
-            _repositoryManager.AssignedNumber.Create(assignedNumber);
-            await _repositoryManager.SaveAsync();
-            return _mapper.Map<AssignedNumberDto>(assignedNumber);
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var assignedNumber = await _repositoryManager.AssignedNumber.GetByIdAsync(id);
-            if (assignedNumber == null)
-            {
-                throw new AssignedNumberNotFoundException(id);
-            }
-
-            _repositoryManager.AssignedNumber.Delete(assignedNumber);
-            await _repositoryManager.SaveAsync();
-        }
-
-        public async Task<IEnumerable<AssignedNumberDto>> GetAllAsync()
-        {
-            var assignedNumbers = await _repositoryManager.AssignedNumber.GetAllAsync();
+            var assignedNumbers = await _repositoryManager.AssignedNumber.GetAssignedNumbersByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<AssignedNumberDto>>(assignedNumbers);
-        }
-
-        public async Task<AssignedNumberDto> GetByIdAsync(int id)
-        {
-            var assignedNumber = await _repositoryManager.AssignedNumber.GetByIdAsync(id);
-            return _mapper.Map<AssignedNumberDto>(assignedNumber);
-        }
-
-        public async Task<IEnumerable<AssignedNumberDto>> GetByUserPlanIdAsync(int planId)
-        {
-            var assignedNumbers = await _repositoryManager.AssignedNumber.GetByUserPlanIdAsync(planId);
-            var assignedNumberDtos = _mapper.Map<IEnumerable<AssignedNumberDto>>(assignedNumbers);
-            return assignedNumberDtos;
-        }
-
-        public async Task UpdateAsync(int id, AssignedNumberUpdateDto updateDto)
-        {
-            var assignedNumber = await _repositoryManager.AssignedNumber.GetByIdAsync(id);
-            if (assignedNumber == null)
-            {
-                throw new AssignedNumberNotFoundException(id);
-            }
-
-            _mapper.Map(updateDto, assignedNumber);
-            _repositoryManager.AssignedNumber.Update(assignedNumber);
-            await _repositoryManager.SaveAsync();
         }
     }
 
