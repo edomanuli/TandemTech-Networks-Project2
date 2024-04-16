@@ -11,7 +11,7 @@ namespace Entities
     public class Device
     {
         public int Id { get; set; }
-        public int AssignedNumberId { get; set; }
+        public int? AssignedNumberId { get; set; }
         public int DeviceInfoId { get; set; }
         public string Name { get; set; }
         public string Serial { get; set; }

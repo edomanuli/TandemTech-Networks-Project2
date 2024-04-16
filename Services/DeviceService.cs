@@ -41,10 +41,13 @@ namespace Service
                 throw new KeyNotFoundException("Device not found.");
             }
 
-            var number = await _repositoryManager.AssignedNumber.GetByIdAsync(device.AssignedNumberId);
-            if (number != null)
+            if (device.AssignedNumberId.HasValue)
             {
-                _repositoryManager.AssignedNumber.Delete(number);
+                var number = await _repositoryManager.AssignedNumber.GetByIdAsync(device.AssignedNumberId.Value);
+                if (number != null)
+                {
+                    _repositoryManager.AssignedNumber.Delete(number);
+                }
             }
 
             _repositoryManager.Device.Delete(device);
@@ -104,5 +107,49 @@ namespace Service
 
             return _mapper.Map<DeviceDto>(device);
         }
+
+        public async Task<DeviceDto> AssignDeviceNumber(int deviceId, int assignedNumberId)
+        {
+            // Fetch the target device
+            var device = await _repositoryManager.Device.GetByIdAsync(deviceId);
+            if (device == null)
+                throw new KeyNotFoundException("Device not found.");
+
+            // Fetch the assigned number to be reassigned
+            var newNumber = await _repositoryManager.AssignedNumber.GetAssignedNumberByIdAsync(assignedNumberId);
+            if (newNumber == null)
+                throw new KeyNotFoundException("Assigned number not found.");
+
+            var currentNumber = await _repositoryManager.AssignedNumber.GetAssignedNumberByIdAsync(device.AssignedNumberId.Value);
+
+            // Check if the assigned number is currently linked to another device
+            var otherDevice = newNumber.Device;
+            if (otherDevice != null && otherDevice.Id != deviceId)
+            {
+                // Remove refference from other device
+                otherDevice.AssignedNumberId = null;
+                _repositoryManager.Device.Update(otherDevice);
+                await _repositoryManager.SaveAsync();
+
+                // Swap the numbers
+                device.AssignedNumberId = newNumber.Id;
+                _repositoryManager.Device.Update(device);
+                await _repositoryManager.SaveAsync();
+
+                otherDevice.AssignedNumberId = currentNumber.Id;
+                _repositoryManager.Device.Update(otherDevice);
+                await _repositoryManager.SaveAsync();
+            }
+            else
+            {
+                device.AssignedNumberId = newNumber.Id;
+                _repositoryManager.Device.Update(device);
+                await _repositoryManager.SaveAsync();
+            }
+
+            return _mapper.Map<DeviceDto>(device);
+        }
+
+
     }
 }

@@ -27,5 +27,14 @@ namespace Repository
                 .Include(an => an.PhoneNumber)
                 .ToListAsync();
         }
+
+        public async Task<AssignedNumber> GetAssignedNumberByIdAsync(int id)
+        {
+            return await FindByCondition(an => an.Id == id, trackChanges: false)
+                .Include(an => an.Device)
+                .Include(an => an.PhoneNumber)
+                .SingleOrDefaultAsync();
+        }
+
     }
 }

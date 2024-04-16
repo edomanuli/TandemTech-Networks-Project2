@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Repository.Configuration
 {
@@ -13,12 +14,12 @@ namespace Repository.Configuration
             // Properties
             builder.Property(d => d.Serial).IsRequired().HasMaxLength(100);
             builder.Property(d => d.Name).HasMaxLength(100);
+            builder.Property(e => e.AssignedNumberId).IsRequired(false);
 
             // Relationships
             builder.HasOne(d => d.AssignedNumber)
-                .WithOne()
-                .HasForeignKey<Device>(d => d.AssignedNumberId)
-                .OnDelete(DeleteBehavior.Cascade);
+            .WithOne(a => a.Device)
+            .HasForeignKey<Device>(d => d.AssignedNumberId);
 
             builder.HasOne(d => d.DeviceInfo)
                    .WithMany()

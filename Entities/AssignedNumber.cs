@@ -15,5 +15,6 @@ namespace Entities
 
         public PhoneNumber? PhoneNumber { get; set; }
         public UserPlan? UserPlan { get; set; }
+        public Device? Device { get; set; }
     }
 }

@@ -92,7 +92,7 @@ namespace TandemTechAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AssignedNumberId")
+                    b.Property<int?>("AssignedNumberId")
                         .HasColumnType("int");
 
                     b.Property<int>("DeviceInfoId")
@@ -111,7 +111,8 @@ namespace TandemTechAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedNumberId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AssignedNumberId] IS NOT NULL");
 
                     b.HasIndex("DeviceInfoId");
 
@@ -720,7 +721,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "40dbef38-db35-47ab-8b1a-6d0348a5ef07",
+                            ConcurrencyStamp = "856043c1-78a7-420c-983d-7e6c483413da",
                             Email = "anuli@example.com",
                             EmailConfirmed = false,
                             FirstName = "Anuli",
@@ -728,7 +729,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANULI@EXAMPLE.COM",
                             NormalizedUserName = "ANULI",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJe9p9j8r630k9LoJMxv2ca29npPMSAkPJBfqWmeq1r5OrCVuStyUa/65CGh01uqqg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHoI04O6Azoc9hCkKTO6+RkJN0HFeURmOoVx+S8T/jNB/d901j9IRMikH6CCLKKKaA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "anuli"
@@ -737,7 +738,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9f140a8-1696-485a-99af-b206951a3757",
+                            ConcurrencyStamp = "8c9cc026-0614-4bb9-811f-670bb31cae74",
                             Email = "CHRIS@example.com",
                             EmailConfirmed = false,
                             FirstName = "Chris",
@@ -745,7 +746,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CHRIS@EXAMPLE.COM",
                             NormalizedUserName = "CHRIS",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGZh5JS92UZryuPZu6O1A6JsAwTK4xEjvUC/MVyMdivntRz2TrVwr5LbHyZTKOm6Ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI1MtY9mbws6kSDuslU54ViALx3YIqvz8smcsVEZkb34ft3VixUPFvd99pJG7kkjbw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "chris"
@@ -977,10 +978,8 @@ namespace TandemTechAPI.Migrations
             modelBuilder.Entity("Entities.Device", b =>
                 {
                     b.HasOne("Entities.AssignedNumber", "AssignedNumber")
-                        .WithOne()
-                        .HasForeignKey("Entities.Device", "AssignedNumberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Device")
+                        .HasForeignKey("Entities.Device", "AssignedNumberId");
 
                     b.HasOne("Entities.DeviceInfo", "DeviceInfo")
                         .WithMany()
@@ -1091,6 +1090,11 @@ namespace TandemTechAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.AssignedNumber", b =>
+                {
+                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("Entities.MonthlyBill", b =>
