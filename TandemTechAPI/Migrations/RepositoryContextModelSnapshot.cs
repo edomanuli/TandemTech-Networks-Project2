@@ -563,15 +563,17 @@ namespace TandemTechAPI.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("BillId")
+                    b.Property<int>("MonthlyBillId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BillingDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("UserPlanId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BillId");
+                    b.HasIndex("MonthlyBillId");
+
+                    b.HasIndex("UserPlanId");
 
                     b.ToTable("PlanBills");
                 });
@@ -718,7 +720,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0084c57-57f8-4652-a515-e77f4b286968",
+                            ConcurrencyStamp = "40dbef38-db35-47ab-8b1a-6d0348a5ef07",
                             Email = "anuli@example.com",
                             EmailConfirmed = false,
                             FirstName = "Anuli",
@@ -726,7 +728,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANULI@EXAMPLE.COM",
                             NormalizedUserName = "ANULI",
-                            PasswordHash = "AQAAAAIAAYagAAAAENSlEqNvL9u9O+Uae4NpWFX7pht/79xOjHvpeUUtuKiQrHBL27Up2i6N9Tlipsamlw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJe9p9j8r630k9LoJMxv2ca29npPMSAkPJBfqWmeq1r5OrCVuStyUa/65CGh01uqqg==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "anuli"
@@ -735,7 +737,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4783bd90-9002-49d2-b75e-25345b481267",
+                            ConcurrencyStamp = "d9f140a8-1696-485a-99af-b206951a3757",
                             Email = "CHRIS@example.com",
                             EmailConfirmed = false,
                             FirstName = "Chris",
@@ -743,7 +745,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CHRIS@EXAMPLE.COM",
                             NormalizedUserName = "CHRIS",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBh3w+A/LNoHlGK94p8pGqFMKA35oCuJoS2qA9BIiR8rKE17bBLSBdO5gq9zd2fXkA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGZh5JS92UZryuPZu6O1A6JsAwTK4xEjvUC/MVyMdivntRz2TrVwr5LbHyZTKOm6Ag==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "chris"
@@ -994,7 +996,7 @@ namespace TandemTechAPI.Migrations
             modelBuilder.Entity("Entities.MonthlyBill", b =>
                 {
                     b.HasOne("Entities.User", "User")
-                        .WithMany("Bills")
+                        .WithMany("MonthlyBills")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1006,11 +1008,19 @@ namespace TandemTechAPI.Migrations
                 {
                     b.HasOne("Entities.MonthlyBill", "MonthlyBill")
                         .WithMany("PlanBills")
-                        .HasForeignKey("BillId")
+                        .HasForeignKey("MonthlyBillId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Entities.UserPlan", "UserPlan")
+                        .WithMany()
+                        .HasForeignKey("UserPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MonthlyBill");
+
+                    b.Navigation("UserPlan");
                 });
 
             modelBuilder.Entity("Entities.UserPlan", b =>
@@ -1100,7 +1110,7 @@ namespace TandemTechAPI.Migrations
 
             modelBuilder.Entity("Entities.User", b =>
                 {
-                    b.Navigation("Bills");
+                    b.Navigation("MonthlyBills");
 
                     b.Navigation("UserPlans");
                 });

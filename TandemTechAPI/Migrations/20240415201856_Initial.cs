@@ -258,27 +258,6 @@ namespace TandemTechAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlanBills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BillId = table.Column<int>(type: "int", nullable: false),
-                    BillingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PlanBills", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PlanBills_MonthlyBills_BillId",
-                        column: x => x.BillId,
-                        principalTable: "MonthlyBills",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AssignedNumbers",
                 columns: table => new
                 {
@@ -298,6 +277,32 @@ namespace TandemTechAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AssignedNumbers_UserPlans_UserPlanId",
+                        column: x => x.UserPlanId,
+                        principalTable: "UserPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlanBills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MonthlyBillId = table.Column<int>(type: "int", nullable: false),
+                    UserPlanId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlanBills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PlanBills_MonthlyBills_MonthlyBillId",
+                        column: x => x.MonthlyBillId,
+                        principalTable: "MonthlyBills",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PlanBills_UserPlans_UserPlanId",
                         column: x => x.UserPlanId,
                         principalTable: "UserPlans",
                         principalColumn: "Id",
@@ -337,8 +342,8 @@ namespace TandemTechAPI.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "d0084c57-57f8-4652-a515-e77f4b286968", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAENSlEqNvL9u9O+Uae4NpWFX7pht/79xOjHvpeUUtuKiQrHBL27Up2i6N9Tlipsamlw==", null, false, null, false, "anuli" },
-                    { 2, 0, "4783bd90-9002-49d2-b75e-25345b481267", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAEBh3w+A/LNoHlGK94p8pGqFMKA35oCuJoS2qA9BIiR8rKE17bBLSBdO5gq9zd2fXkA==", null, false, null, false, "chris" }
+                    { 1, 0, "40dbef38-db35-47ab-8b1a-6d0348a5ef07", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAEJe9p9j8r630k9LoJMxv2ca29npPMSAkPJBfqWmeq1r5OrCVuStyUa/65CGh01uqqg==", null, false, null, false, "anuli" },
+                    { 2, 0, "d9f140a8-1696-485a-99af-b206951a3757", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAEGZh5JS92UZryuPZu6O1A6JsAwTK4xEjvUC/MVyMdivntRz2TrVwr5LbHyZTKOm6Ag==", null, false, null, false, "chris" }
                 });
 
             migrationBuilder.InsertData(
@@ -527,9 +532,14 @@ namespace TandemTechAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlanBills_BillId",
+                name: "IX_PlanBills_MonthlyBillId",
                 table: "PlanBills",
-                column: "BillId");
+                column: "MonthlyBillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlanBills_UserPlanId",
+                table: "PlanBills",
+                column: "UserPlanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserPlans_PlanInfoId",

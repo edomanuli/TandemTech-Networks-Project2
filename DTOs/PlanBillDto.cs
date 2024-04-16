@@ -10,7 +10,9 @@ namespace DTOs
     {
         public int Id { get; set; }
         public int MonthlyBillId { get; set; }
-        public DateTime BillingDate { get; set; }
+        public int UserPlanId { get; set; }
         public decimal Amount { get; set; }
+
+        public UserPlanDto? UserPlan { get; set; }
     }
 }

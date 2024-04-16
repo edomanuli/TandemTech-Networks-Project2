@@ -8,6 +8,6 @@ namespace Entities
         public string? LastName { get; set; }
 
         public ICollection<UserPlan>? UserPlans { get; set; }
-        public ICollection<MonthlyBill>? Bills { get; set; }
+        public ICollection<MonthlyBill>? MonthlyBills { get; set; }
     }
 }

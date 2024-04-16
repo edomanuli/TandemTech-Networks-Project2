@@ -22,6 +22,8 @@ namespace Repository
                                                   bill.BillingDate.Month == month,
                                           trackChanges: false)
                                 .Include(bill => bill.PlanBills)
+                                    .ThenInclude(planBill => planBill.UserPlan)
+                                        .ThenInclude(userPlan => userPlan.PlanInfo)
                                 .SingleOrDefaultAsync();
         }
     }
