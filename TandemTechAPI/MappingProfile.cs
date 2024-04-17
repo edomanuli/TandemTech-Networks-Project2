@@ -27,6 +27,7 @@ namespace TandemTechAPI
             CreateMap<PlanBill, PlanBillDto>();
 
             CreateMap<Device, DeviceDto>();
+            CreateMap<Device, DeviceWithDetailsDto>();
             CreateMap<DeviceInfo, DeviceInfoDto>();
 
             CreateMap<DeviceCreateDto, Device>()
