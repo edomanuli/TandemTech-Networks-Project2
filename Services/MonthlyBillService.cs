@@ -65,7 +65,10 @@ namespace Service
 
             _repositoryManager.MonthlyBill.Create(newBill);
             await _repositoryManager.SaveAsync();
-            return _mapper.Map<MonthlyBillDto>(newBill);
+
+            // This is just to ensure userplan information is mapped in the dto
+            var billToSend = await _repositoryManager.MonthlyBill.GetMonthlyBillByUserAndMonth(userId, year, month);
+            return _mapper.Map<MonthlyBillDto>(billToSend);
         }
     }
 }
