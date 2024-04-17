@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 
 namespace Repository.Configuration
@@ -21,6 +22,11 @@ namespace Repository.Configuration
             builder.HasOne(up => up.PlanInfo)
                    .WithMany(pi => pi.UserPlans)
                    .HasForeignKey(up => up.PlanInfoId);
+
+            builder
+                .HasMany(up => up.AssignedNumbers)
+                .WithOne(an => an.UserPlan)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Seed data
             builder.HasData(

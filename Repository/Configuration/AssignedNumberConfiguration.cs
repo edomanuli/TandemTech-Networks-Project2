@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 
 namespace Repository.Configuration
@@ -25,6 +26,12 @@ namespace Repository.Configuration
                    .WithOne(pn => pn.AssignedNumber)
                    .HasForeignKey<AssignedNumber>(an => an.PhoneNumberId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasOne(an => an.Device)
+                .WithOne(d => d.AssignedNumber)
+                .HasForeignKey<Device>(d => d.AssignedNumberId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Seed data
             builder.HasData(

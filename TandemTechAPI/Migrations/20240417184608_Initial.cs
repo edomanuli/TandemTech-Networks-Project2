@@ -327,7 +327,8 @@ namespace TandemTechAPI.Migrations
                         name: "FK_Devices_AssignedNumbers_AssignedNumberId",
                         column: x => x.AssignedNumberId,
                         principalTable: "AssignedNumbers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Devices_DeviceInfo_DeviceInfoId",
                         column: x => x.DeviceInfoId,
@@ -341,8 +342,8 @@ namespace TandemTechAPI.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "856043c1-78a7-420c-983d-7e6c483413da", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAEHoI04O6Azoc9hCkKTO6+RkJN0HFeURmOoVx+S8T/jNB/d901j9IRMikH6CCLKKKaA==", null, false, null, false, "anuli" },
-                    { 2, 0, "8c9cc026-0614-4bb9-811f-670bb31cae74", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAEI1MtY9mbws6kSDuslU54ViALx3YIqvz8smcsVEZkb34ft3VixUPFvd99pJG7kkjbw==", null, false, null, false, "chris" }
+                    { 1, 0, "f98f135f-db42-4fd3-b23d-3a224f7a313e", "anuli@example.com", false, "Anuli", "Edom", false, null, "ANULI@EXAMPLE.COM", "ANULI", "AQAAAAIAAYagAAAAEP0J/ykQ+BEIKphXonFVA7nm7zWxu2MXtF7Fw0bUL6oMuZVTF3X7o+VzDG/Yu0iHMA==", null, false, null, false, "anuli" },
+                    { 2, 0, "a5665490-46a1-46a6-adbf-f2a30acd0d31", "CHRIS@example.com", false, "Chris", "Leipold", false, null, "CHRIS@EXAMPLE.COM", "CHRIS", "AQAAAAIAAYagAAAAELZIyAacK+cJeE/hTuhvaKzaIIYXHk6RiVgBqorGBSTBU8OsDoAOxqwMb23piQX+ig==", null, false, null, false, "chris" }
                 });
 
             migrationBuilder.InsertData(

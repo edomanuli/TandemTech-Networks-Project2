@@ -721,7 +721,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "856043c1-78a7-420c-983d-7e6c483413da",
+                            ConcurrencyStamp = "f98f135f-db42-4fd3-b23d-3a224f7a313e",
                             Email = "anuli@example.com",
                             EmailConfirmed = false,
                             FirstName = "Anuli",
@@ -729,7 +729,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANULI@EXAMPLE.COM",
                             NormalizedUserName = "ANULI",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHoI04O6Azoc9hCkKTO6+RkJN0HFeURmOoVx+S8T/jNB/d901j9IRMikH6CCLKKKaA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP0J/ykQ+BEIKphXonFVA7nm7zWxu2MXtF7Fw0bUL6oMuZVTF3X7o+VzDG/Yu0iHMA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "anuli"
@@ -738,7 +738,7 @@ namespace TandemTechAPI.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8c9cc026-0614-4bb9-811f-670bb31cae74",
+                            ConcurrencyStamp = "a5665490-46a1-46a6-adbf-f2a30acd0d31",
                             Email = "CHRIS@example.com",
                             EmailConfirmed = false,
                             FirstName = "Chris",
@@ -746,7 +746,7 @@ namespace TandemTechAPI.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CHRIS@EXAMPLE.COM",
                             NormalizedUserName = "CHRIS",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI1MtY9mbws6kSDuslU54ViALx3YIqvz8smcsVEZkb34ft3VixUPFvd99pJG7kkjbw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELZIyAacK+cJeE/hTuhvaKzaIIYXHk6RiVgBqorGBSTBU8OsDoAOxqwMb23piQX+ig==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "chris"
@@ -979,7 +979,8 @@ namespace TandemTechAPI.Migrations
                 {
                     b.HasOne("Entities.AssignedNumber", "AssignedNumber")
                         .WithOne("Device")
-                        .HasForeignKey("Entities.Device", "AssignedNumberId");
+                        .HasForeignKey("Entities.Device", "AssignedNumberId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Entities.DeviceInfo", "DeviceInfo")
                         .WithMany()
