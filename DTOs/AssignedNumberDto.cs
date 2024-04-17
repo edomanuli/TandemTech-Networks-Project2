@@ -12,6 +12,6 @@ namespace DTOs
         public int PhoneNumberId { get; set; }
         public int UserPlanId { get; set; }
         public PhoneNumberDto? PhoneNumber { get; set; }
-        public UserPlanDto? UserPlan { get; set; }
+        public DeviceDto? Device { get; set; }
     }
 }

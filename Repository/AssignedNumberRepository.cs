@@ -16,8 +16,8 @@ namespace Repository
         public async Task<IEnumerable<AssignedNumber>> GetAssignedNumbersByUserIdAsync(int userId)
         {
             return await FindByCondition(an => an.UserPlan.UserId == userId, trackChanges: false)
-                .Include(an => an.UserPlan)
                 .Include(an => an.PhoneNumber)
+                .Include(an => an.Device)
                 .ToListAsync();
         }
 
@@ -25,6 +25,7 @@ namespace Repository
         {
             return await FindByCondition(an => an.UserPlanId == planId, trackChanges: false)
                 .Include(an => an.PhoneNumber)
+                .Include(an => an.Device)
                 .ToListAsync();
         }
 

@@ -54,17 +54,17 @@ namespace Service
             await _repositoryManager.SaveAsync();
         }
 
-        public async Task<DeviceDto> GetDeviceByIdAsync(int deviceId)
+        public async Task<DeviceWithDetailsDto> GetDeviceByIdAsync(int deviceId)
         {
             var device = await _repositoryManager.Device.GetByIdAsync(deviceId);
             if (device == null)
             {
                 throw new KeyNotFoundException("Device not found.");
             }
-            return _mapper.Map<DeviceDto>(device);
+            return _mapper.Map<DeviceWithDetailsDto>(device);
         }
 
-        public async Task<DeviceDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto)
+        public async Task<DeviceWithDetailsDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto)
         {
             // Verify that the UserPlan belongs to the User
             var userPlan = await _repositoryManager.UserPlan.GetByIdWithInfoAsync(deviceDto.UserPlanId);
@@ -105,10 +105,10 @@ namespace Service
             _repositoryManager.Device.Create(device);
             await _repositoryManager.SaveAsync(); 
 
-            return _mapper.Map<DeviceDto>(device);
+            return _mapper.Map<DeviceWithDetailsDto>(device);
         }
 
-        public async Task<DeviceDto> AssignDeviceNumber(int deviceId, int assignedNumberId)
+        public async Task<DeviceWithDetailsDto> AssignDeviceNumber(int deviceId, int assignedNumberId)
         {
             // Fetch the target device
             var device = await _repositoryManager.Device.GetByIdAsync(deviceId);
@@ -147,7 +147,7 @@ namespace Service
                 await _repositoryManager.SaveAsync();
             }
 
-            return _mapper.Map<DeviceDto>(device);
+            return _mapper.Map<DeviceWithDetailsDto>(device);
         }
 
 

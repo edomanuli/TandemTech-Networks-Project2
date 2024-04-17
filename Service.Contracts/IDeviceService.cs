@@ -11,8 +11,8 @@ namespace Service.Contracts
     {
         Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(int userId);
         Task DeleteDeviceAsync(int deviceId);
-        Task<DeviceDto> GetDeviceByIdAsync(int deviceId);
-        Task<DeviceDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto);
-        Task<DeviceDto> AssignDeviceNumber(int deviceId, int assignedNumberId);
+        Task<DeviceWithDetailsDto> GetDeviceByIdAsync(int deviceId);
+        Task<DeviceWithDetailsDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto);
+        Task<DeviceWithDetailsDto> AssignDeviceNumber(int deviceId, int assignedNumberId);
     }
 }

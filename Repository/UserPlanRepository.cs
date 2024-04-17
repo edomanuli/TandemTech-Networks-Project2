@@ -25,6 +25,10 @@ namespace Repository
         {
             return await FindByCondition(up => up.UserId == userId, trackChanges: false)
                             .Include(up => up.PlanInfo)
+                            .Include(up => up.AssignedNumbers)
+                                .ThenInclude(an => an.PhoneNumber)
+                            .Include(up => up.AssignedNumbers)
+                            .ThenInclude(an => an.Device)
                             .ToListAsync();
         }
     }
