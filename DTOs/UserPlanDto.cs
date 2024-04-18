@@ -14,7 +14,7 @@ namespace DTOs
 
         public DateTime EnrollmentDate { get; set; }
         public PlanInfoDto? PlanInfo { get; set; }
-        public IEnumerable<AssignedNumberDto>? AssignedNumbers { get; set; }
+        //public IEnumerable<AssignedNumberDto>? AssignedNumbers { get; set; }
     }
 
     public class UserPlanCreateDto

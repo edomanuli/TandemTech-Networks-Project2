@@ -18,6 +18,9 @@ namespace Repository
             return await RepositoryContext.Devices
                 .Include(device => device.AssignedNumber)
                     .ThenInclude(assignedNumber => assignedNumber.PhoneNumber)
+                .Include(device => device.AssignedNumber)
+                    .ThenInclude(assignedNumber => assignedNumber.UserPlan)
+                        .ThenInclude(userPlan => userPlan.PlanInfo)
                 .Include(device => device.DeviceInfo)
                 .Where(device => device.AssignedNumber.UserPlan.UserId == userId)
                 .ToListAsync();
