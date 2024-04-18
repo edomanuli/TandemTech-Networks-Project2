@@ -27,10 +27,10 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(int userId)
+        public async Task<IEnumerable<DeviceWithDetailsDto>> GetDevicesByUserIdAsync(int userId)
         {
             var devices = await _repositoryManager.Device.GetDevicesByUserIdAsync(userId);
-            return _mapper.Map<IEnumerable<DeviceDto>>(devices);
+            return _mapper.Map<IEnumerable<DeviceWithDetailsDto>>(devices);
         }
 
         public async Task DeleteDeviceAsync(int deviceId)

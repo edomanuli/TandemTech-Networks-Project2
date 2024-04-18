@@ -9,7 +9,7 @@ namespace Service.Contracts
 {
     public interface IDeviceService
     {
-        Task<IEnumerable<DeviceDto>> GetDevicesByUserIdAsync(int userId);
+        Task<IEnumerable<DeviceWithDetailsDto>> GetDevicesByUserIdAsync(int userId);
         Task DeleteDeviceAsync(int deviceId);
         Task<DeviceWithDetailsDto> GetDeviceByIdAsync(int deviceId);
         Task<DeviceWithDetailsDto> AddDeviceAsync(int userId, DeviceCreateDto deviceDto);
